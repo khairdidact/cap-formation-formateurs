@@ -1,1013 +1,986 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Prendre en main le Centre d'Aide Pédagogique · KHAIRDIDACT</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
 <style>
-:root {
-  --navy:    #1a2f5a;
-  --navy-l:  #2a4880;
-  --terra:   #c85c3a;
-  --gold:    #e8a838;
-  --forest:  #2a7a5e;
-  --cream:   #faf7f2;
-  --parchm:  #f0ebe0;
-  --white:   #ffffff;
-  --text:    #1f2937;
-  --muted:   #6b7280;
-  --border:  #d4c9b8;
-  --shadow:  0 4px 24px rgba(26,47,90,0.13);
-  --shadow-s:0 2px 10px rgba(26,47,90,0.09);
+:root{
+  --ink:#1a1a2e;--paper:#f5f0e8;--paper-dark:#ede7d9;
+  --sage:#3d6b4f;--sage-lite:#5a9470;--sage-pale:#e8f0eb;
+  --dust:#ddd5c4;--muted:#7a7264;--white:#fff;
+  --radius:14px;
+  --ok:#2d6a3f;--ok-pale:#e8f5ee;--ok-border:#b8d4c0;
+  --err:#8b2222;--err-pale:#faeaea;--err-border:#f4b8b8;
+  --gold:#b8860b;--gold-pale:#fdf8e1;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-body{
-  font-family:'Outfit',sans-serif;
-  background:var(--cream);
-  color:var(--text);
-  min-height:100vh;
-}
-/* ── HEADER ── */
-.header{
-  background:var(--navy);
-  color:#fff;
-  padding:20px 20px 0;
-  position:relative;
-  overflow:hidden;
-}
-.header::before{
-  content:'';
-  position:absolute;inset:0;
-  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-}
-.header-inner{
-  position:relative;
-  max-width:860px;
-  margin:0 auto;
-  display:flex;
-  align-items:flex-start;
-  gap:16px;
-}
-.header-icon{
-  font-size:3rem;
-  line-height:1;
-  margin-top:4px;
-}
-.header-text h1{
-  font-size:1.5rem;
-  font-weight:800;
-  line-height:1.2;
-  letter-spacing:-0.02em;
-}
-.header-text p{
-  font-size:0.8rem;
-  opacity:0.7;
-  margin-top:4px;
-  font-style:italic;
-}
-.phase-bar{
-  max-width:860px;
-  margin:16px auto 0;
-  display:flex;
-  position:relative;
-  gap:0;
-}
-.pb-step{
-  flex:1;
-  padding:10px 8px;
-  display:flex;
-  align-items:center;
-  gap:8px;
-  border-radius:8px 8px 0 0;
-  cursor:default;
-  transition:background 0.3s;
-  font-size:0.72rem;
-  font-weight:600;
-  color:rgba(255,255,255,0.45);
-  white-space:nowrap;
-  overflow:hidden;
-}
-.pb-step.active{
-  background:rgba(255,255,255,0.12);
-  color:#fff;
-}
-.pb-step.done{color:rgba(255,255,255,0.7)}
-.pb-num{
-  width:24px;height:24px;
-  border-radius:50%;
-  background:rgba(255,255,255,0.15);
-  display:flex;align-items:center;justify-content:center;
-  font-size:0.72rem;font-weight:800;
-  flex-shrink:0;
-}
-.pb-step.active .pb-num{background:var(--gold);color:var(--navy)}
-.pb-step.done .pb-num{background:var(--forest);color:#fff}
-.pb-label{display:none}
-@media(min-width:500px){.pb-label{display:block}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;font-weight:300;background:var(--paper);color:var(--ink);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;}
 
-/* ── BODY ── */
-.main{max-width:860px;margin:0 auto;padding:24px 16px 60px}
-.phase-view{display:none}
-.phase-view.active{display:block;animation:fadeUp 0.4s ease}
-@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+/* ── Nav ── */
+nav{position:sticky;top:0;z-index:100;background:rgba(245,240,232,.93);backdrop-filter:blur(8px);border-bottom:1px solid var(--dust);padding:0 24px;}
+.nav-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:52px;}
+.nav-brand{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--sage);font-weight:500;}
+.nav-steps{display:flex;gap:4px;}
+.nav-step{padding:6px 12px;border-radius:99px;font-size:11px;font-weight:500;color:var(--muted);border:1.5px solid transparent;transition:all .2s;cursor:pointer;}
+.nav-step.active{background:var(--sage-pale);color:var(--sage);border-color:var(--ok-border);}
+.nav-step.done{background:var(--ok-pale);color:var(--ok);}
 
-/* ── CARDS ── */
-.card{
-  background:var(--white);
-  border-radius:14px;
-  padding:28px;
-  box-shadow:var(--shadow);
-  margin-bottom:20px;
-  border:1px solid rgba(212,201,184,0.5);
-}
-.card-icon-title{
-  display:flex;align-items:center;gap:12px;
-  margin-bottom:6px;
-}
-.card-icon{
-  width:44px;height:44px;
-  border-radius:10px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.4rem;
-  flex-shrink:0;
-}
-.ci-navy{background:#eef1f8}
-.ci-terra{background:#fdf1ed}
-.ci-gold{background:#fdf5e6}
-.ci-forest{background:#ecf7f3}
-.card h2{font-size:1.15rem;font-weight:800;color:var(--navy);line-height:1.25}
-.card-sub{font-size:0.875rem;color:var(--muted);margin:6px 0 22px;line-height:1.5;font-family:'Source Serif 4',serif;font-style:italic}
+/* ── Page ── */
+.page{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:40px 24px 80px;}
+.section{margin-bottom:64px;}
+.section-header{text-align:center;margin-bottom:36px;}
+.section-icon{font-size:32px;margin-bottom:12px;}
+.section-tag{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);font-weight:500;margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:10px;}
+.section-tag::before,.section-tag::after{content:'';width:28px;height:1px;background:var(--sage-lite);}
+h2{font-family:'DM Serif Display',serif;font-size:clamp(22px,4vw,34px);line-height:1.15;margin-bottom:10px;}
+h2 em{font-style:italic;color:var(--sage);}
+.section-intro{font-size:14px;color:var(--muted);max-width:560px;margin:0 auto;line-height:1.75;}
+.card{background:var(--white);border-radius:var(--radius);padding:28px 30px;box-shadow:0 2px 18px rgba(26,26,46,.07);}
 
-/* ── FORMS ── */
-.fg{margin-bottom:16px}
-.fg label{display:block;font-size:0.82rem;font-weight:700;color:var(--navy);margin-bottom:7px;letter-spacing:0.02em;text-transform:uppercase}
-input[type=text],input[type=email]{
-  width:100%;
-  padding:11px 14px;
-  border:2px solid var(--border);
-  border-radius:9px;
-  font-size:0.95rem;
-  font-family:'Outfit',sans-serif;
-  transition:border-color 0.2s,box-shadow 0.2s;
-  background:var(--cream);
-}
-input:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(26,47,90,0.08);background:#fff}
-.radio-row{display:flex;gap:12px;flex-wrap:wrap}
-.radio-card{
-  flex:1;min-width:140px;
-  padding:13px 16px;
-  border:2px solid var(--border);
-  border-radius:10px;
-  cursor:pointer;
-  transition:all 0.2s;
-  font-size:0.9rem;font-weight:600;
-  display:flex;align-items:center;gap:9px;
-  background:var(--cream);
-  user-select:none;
-}
-.radio-card:hover{border-color:var(--navy)}
-.radio-card.sel{border-color:var(--navy);background:#eef1f8;color:var(--navy)}
-.radio-card input{display:none}
-.radio-dot{
-  width:18px;height:18px;
-  border-radius:50%;
-  border:2px solid var(--border);
-  transition:all 0.2s;
-  flex-shrink:0;
-}
-.radio-card.sel .radio-dot{background:var(--navy);border-color:var(--navy)}
+/* ── Identification ── */
+.form-group{margin-bottom:18px;}
+.form-label{font-size:11px;letter-spacing:.08em;color:var(--muted);display:block;margin-bottom:6px;text-transform:uppercase;}
+.form-input{width:100%;padding:11px 14px;border:1.5px solid var(--dust);border-radius:9px;font-family:'DM Sans',sans-serif;font-size:14px;background:var(--white);color:var(--ink);transition:border-color .2s;}
+.form-input:focus{outline:none;border-color:var(--sage);}
+.radio-group{display:flex;gap:12px;}
+.radio-label{display:flex;align-items:center;gap:8px;padding:9px 16px;border:1.5px solid var(--dust);border-radius:9px;cursor:pointer;font-size:13px;transition:all .2s;}
+.radio-label:has(input:checked){border-color:var(--sage);background:var(--sage-pale);color:var(--sage);}
+.radio-label input{display:none;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:var(--sage);color:var(--white);border:none;border-radius:99px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;letter-spacing:.06em;cursor:pointer;transition:background .2s;}
+.btn-primary:hover{background:var(--sage-lite);}
+.btn-primary:disabled{background:var(--dust);color:var(--muted);cursor:not-allowed;}
 
-/* ── BUTTONS ── */
-.btn{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:11px 22px;
-  border-radius:9px;
-  font-size:0.9rem;font-weight:700;
-  cursor:pointer;border:none;
-  transition:all 0.18s;
-  font-family:'Outfit',sans-serif;
-  text-decoration:none;
-}
-.btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-s)}
-.btn:active{transform:translateY(0)}
-.btn:disabled{opacity:0.45;cursor:not-allowed;transform:none;box-shadow:none}
-.btn-navy{background:var(--navy);color:#fff}
-.btn-navy:hover{background:var(--navy-l)}
-.btn-terra{background:var(--terra);color:#fff}
-.btn-terra:hover{background:#b04d2e}
-.btn-gold{background:var(--gold);color:var(--navy)}
-.btn-gold:hover{background:#d49528}
-.btn-forest{background:var(--forest);color:#fff}
-.btn-forest:hover{background:#1f6148}
-.btn-ghost{background:var(--parchm);color:var(--text);border:1px solid var(--border)}
-.btn-ghost:hover{background:#e8e0d0}
-.btn-sm{padding:8px 14px;font-size:0.8rem}
-.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+/* ── Roue ── */
+.roue-card{text-align:center;padding:36px 30px;}
+.roue-badge{display:inline-block;padding:6px 16px;background:var(--sage-pale);color:var(--sage);border-radius:99px;font-size:11px;font-weight:500;letter-spacing:.1em;margin-bottom:20px;}
+.btn-roue{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;background:var(--sage);color:var(--white);border:none;border-radius:99px;font-family:'DM Serif Display',serif;font-size:18px;cursor:pointer;transition:all .3s;margin-bottom:28px;}
+.btn-roue:hover{background:var(--sage-lite);transform:scale(1.03);}
+.btn-roue.spinning{animation:spinPulse .6s ease-in-out;}
+@keyframes spinPulse{0%{transform:rotate(0) scale(1);}50%{transform:rotate(15deg) scale(1.06);}100%{transform:rotate(0) scale(1);}}
+.situation-box{display:none;background:var(--paper);border-radius:12px;padding:24px;text-align:left;border:1.5px solid var(--sage-pale);}
+.situation-box.show{display:block;animation:fadeUp .4s ease both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+.situation-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px;}
+.critere-chip{background:var(--white);border-radius:8px;padding:10px 12px;border:1px solid var(--dust);}
+.critere-label{font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-bottom:3px;}
+.critere-val{font-size:13px;font-weight:500;color:var(--sage);}
+.roue-actions{display:flex;gap:10px;justify-content:center;}
+.btn-ghost{padding:9px 20px;border:1.5px solid var(--dust);border-radius:99px;background:transparent;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:var(--muted);cursor:pointer;transition:all .2s;}
+.btn-ghost:hover{border-color:var(--sage);color:var(--sage);}
+.btn-next{padding:10px 24px;background:var(--sage);color:var(--white);border:none;border-radius:99px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;cursor:pointer;transition:background .2s;}
+.btn-next:hover{background:var(--sage-lite);}
 
-/* ── ALERTS ── */
-.alert{
-  padding:13px 16px;
-  border-radius:9px;
-  font-size:0.875rem;
-  margin:14px 0;
-  display:flex;align-items:flex-start;gap:10px;
-  line-height:1.5;
-}
-.alert-ok{background:#ecf7f3;border-left:4px solid var(--forest);color:#1f5e42}
-.alert-warn{background:#fff7ed;border-left:4px solid var(--gold);color:#925c10}
-.alert-err{background:#fdf1ed;border-left:4px solid var(--terra);color:#7d2a15}
-.alert-info{background:#eef1f8;border-left:4px solid var(--navy);color:var(--navy)}
+/* ── Arbre ── */
+.tree-steps{display:flex;flex-direction:column;gap:20px;}
+.tree-step{background:var(--white);border-radius:var(--radius);overflow:hidden;box-shadow:0 2px 16px rgba(26,26,46,.07);}
+.tree-step-header{display:grid;grid-template-columns:48px 1fr auto;align-items:center;gap:16px;padding:22px 24px;cursor:default;}
+.step-num{width:40px;height:40px;border-radius:50%;background:var(--sage-pale);color:var(--sage);display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:18px;font-weight:400;flex-shrink:0;}
+.step-title{font-family:'DM Serif Display',serif;font-size:17px;}
+.step-icon{font-size:20px;margin-right:8px;}
+.step-status{width:28px;height:28px;border-radius:50%;border:2px solid var(--dust);display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .4s;flex-shrink:0;}
+.step-status.done-ok{background:var(--ok);border-color:var(--ok);color:#fff;}
+.step-body{padding:0 24px 22px;}
+.step-desc{font-size:13.5px;line-height:1.75;color:#333;margin-bottom:18px;}
+.step-divider{height:1px;background:var(--paper-dark);margin-bottom:18px;}
+.step-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
 
-/* ── SLOT MACHINE ── */
-.slot-wrap{
-  background:linear-gradient(160deg,var(--navy) 0%,#162449 100%);
-  border-radius:16px;
-  padding:22px 20px;
-  margin:20px 0;
-  position:relative;
-  overflow:hidden;
-}
-.slot-wrap::after{
-  content:'';position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,var(--terra),var(--gold),var(--terra));
-}
-.slot-label{
-  text-align:center;
-  color:var(--gold);
-  font-size:0.75rem;font-weight:800;
-  letter-spacing:0.12em;text-transform:uppercase;
-  margin-bottom:16px;
-}
-.drums-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-  margin-bottom:20px;
-}
-@media(min-width:560px){.drums-grid{grid-template-columns:repeat(3,1fr)}}
-.drum-wrap{position:relative}
-.drum-crit{
-  font-size:0.65rem;font-weight:700;
-  color:rgba(255,255,255,0.5);
-  text-transform:uppercase;letter-spacing:0.08em;
-  text-align:center;margin-bottom:5px;
-}
-.drum-win{
-  height:68px;overflow:hidden;
-  border-radius:8px;
-  border:1.5px solid rgba(255,255,255,0.15);
-  background:rgba(255,255,255,0.06);
-  position:relative;
-}
-.drum-win::before,.drum-win::after{
-  content:'';position:absolute;left:0;right:0;height:22px;z-index:2;pointer-events:none;
-}
-.drum-win::before{top:0;background:linear-gradient(to bottom,rgba(22,36,73,0.95),transparent)}
-.drum-win::after{bottom:0;background:linear-gradient(to top,rgba(22,36,73,0.95),transparent)}
-.drum-strip{display:flex;flex-direction:column}
-.drum-item{
-  height:68px;
-  display:flex;align-items:center;justify-content:center;
-  text-align:center;
-  font-size:0.75rem;font-weight:700;
-  color:#fff;padding:6px 8px;line-height:1.3;
-}
-.drum-item.hi{color:var(--gold)}
+/* ── Bouton IA ── */
+.btn-ia{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;background:var(--ink);color:var(--white);border:none;border-radius:99px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:.05em;cursor:pointer;transition:background .2s;}
+.btn-ia:hover{background:#2d2d4a;}
+.btn-ia.loading{opacity:.7;cursor:wait;}
 
-/* ── SITUATION RESULT ── */
-.situ-card{
-  background:#fff;border-radius:11px;
-  padding:18px;margin-top:14px;
-}
-.situ-title{
-  font-size:0.75rem;font-weight:800;color:var(--navy);
-  text-transform:uppercase;letter-spacing:0.08em;
-  text-align:center;margin-bottom:12px;
-}
-.tags{display:flex;flex-wrap:wrap;gap:7px;justify-content:center}
-.tag{
-  padding:5px 12px;border-radius:20px;
-  font-size:0.78rem;font-weight:700;
-}
-.t0{background:#dbeafe;color:#1e3a8a}
-.t1{background:#dcfce7;color:#14532d}
-.t2{background:#fef9c3;color:#713f12}
-.t3{background:#fce7f3;color:#831843}
-.t4{background:#ede9fe;color:#4c1d95}
-.t5{background:#ffedd5;color:#7c2d12}
+/* ── Panel IA ── */
+.ia-panel{display:none;background:linear-gradient(135deg,#1a1a2e 0%,#2d3561 100%);border-radius:12px;padding:22px 24px;margin-top:16px;margin-bottom:4px;}
+.ia-panel.open{display:block;animation:fadeUp .3s ease both;}
+.ia-panel-header{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+.ia-dot{width:8px;height:8px;border-radius:50%;background:#5a9470;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+.ia-panel-title{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:#9ca3c4;font-weight:500;}
+.ia-content{font-size:13px;line-height:1.85;color:#d4d8f0;}
+.ia-content .ia-line{padding:3px 0;border-bottom:1px solid rgba(255,255,255,.06);}
+.ia-content .ia-line:last-child{border:none;}
+.ia-content .ia-line::before{content:attr(data-n)'. ';color:#5a9470;font-weight:500;}
+.ia-loading{color:#9ca3c4;font-style:italic;font-size:13px;}
+.ia-loading::after{content:'';animation:dots 1.4s infinite;display:inline-block;width:24px;text-align:left;}
+@keyframes dots{0%{content:'';}33%{content:'.';}66%{content:'..';}100%{content:'...'}}
 
-/* ── TREE STEPS ── */
-.tstep{
-  display:flex;gap:14px;
-  padding:16px;
-  border-radius:12px;
-  margin-bottom:12px;
-  border:2px solid var(--border);
-  background:var(--parchm);
-  opacity:0.45;pointer-events:none;
-  transition:all 0.3s;
-}
-.tstep.on{opacity:1;pointer-events:auto;background:#fff;border-color:var(--navy)}
-.tstep.done{opacity:0.75;background:#f9f9f9;border-color:var(--forest);pointer-events:none}
-.tstep-num{
-  width:34px;height:34px;border-radius:50%;
-  background:var(--border);color:var(--muted);
-  display:flex;align-items:center;justify-content:center;
-  font-size:0.8rem;font-weight:800;flex-shrink:0;margin-top:1px;
-}
-.tstep.on .tstep-num{background:var(--navy);color:#fff}
-.tstep.done .tstep-num{background:var(--forest);color:#fff}
-.tstep-body{flex:1}
-.tstep-title{font-size:0.95rem;font-weight:800;color:var(--navy);margin-bottom:5px}
-.tstep-desc{font-size:0.83rem;color:var(--muted);margin-bottom:12px;line-height:1.5;font-family:'Source Serif 4',serif}
-.tstep-acts{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+/* ── Bouton KHAIRDIDACT ── */
+.btn-khair{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border:1.5px solid var(--sage);color:var(--sage);background:transparent;border-radius:99px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:.05em;cursor:pointer;transition:all .2s;}
+.btn-khair:hover{background:var(--sage);color:var(--white);}
 
-/* ── AI GUIDE ── */
-.ai-box{
-  background:linear-gradient(135deg,#eef1f8,#e6ebf5);
-  border-radius:9px;border-left:4px solid var(--navy);
-  padding:14px 16px;margin:12px 0;
-  font-size:0.85rem;line-height:1.6;
-}
-.ai-hd{
-  font-size:0.72rem;font-weight:800;color:var(--navy);
-  text-transform:uppercase;letter-spacing:0.08em;
-  margin-bottom:9px;display:flex;align-items:center;gap:6px;
-}
-.dots{display:flex;gap:4px;align-items:center}
-.dot{
-  width:7px;height:7px;border-radius:50%;
-  background:var(--navy);opacity:0.6;
-  animation:bbl 0.7s ease-in-out infinite alternate;
-}
-.dot:nth-child(2){animation-delay:.2s}
-.dot:nth-child(3){animation-delay:.4s}
-@keyframes bbl{to{transform:translateY(-6px);opacity:0.2}}
+/* ── Bouton étape réalisée ── */
+.btn-etape{display:inline-flex;align-items:center;gap:7px;padding:9px 20px;background:var(--dust);color:var(--muted);border:none;border-radius:99px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;cursor:not-allowed;transition:all .4s;position:relative;}
+.btn-etape.unlocked{background:var(--ok);color:#fff;cursor:pointer;}
+.btn-etape.unlocked:hover{background:#24573a;}
+.btn-etape.flash-red{animation:flashRed 1.2s ease;}
+@keyframes flashRed{0%,100%{background:var(--dust);color:var(--muted);}20%,60%{background:var(--err);color:#fff;}40%,80%{background:var(--err-pale);color:var(--err);}}
+.btn-etape.flash-green{animation:flashGreen .8s ease both;}
+@keyframes flashGreen{0%{transform:scale(1);}50%{transform:scale(1.08);background:#1e5c34;}100%{transform:scale(1);}}
+.score-gate-badge{font-size:10px;padding:2px 8px;background:rgba(255,255,255,.25);border-radius:99px;margin-left:4px;}
 
-/* ── PROGRESS ── */
-.prog{height:7px;border-radius:4px;background:var(--border);overflow:hidden;margin:14px 0}
-.prog-fill{height:100%;border-radius:4px;transition:width 0.5s ease;background:linear-gradient(90deg,var(--navy),var(--forest))}
+/* ── Modal quiz KHAIRDIDACT ── */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(26,26,46,.6);backdrop-filter:blur(5px);z-index:500;align-items:center;justify-content:center;padding:16px;}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--white);border-radius:18px;max-width:640px;width:100%;max-height:92vh;overflow-y:auto;box-shadow:0 30px 90px rgba(26,26,46,.28);animation:modalIn .35s cubic-bezier(.2,.8,.3,1) both;}
+@keyframes modalIn{from{opacity:0;transform:scale(.93) translateY(14px);}to{opacity:1;transform:scale(1) translateY(0);}}
+.modal-top{height:5px;border-radius:18px 18px 0 0;}
+.modal-inner{padding:28px 32px 32px;}
+.modal-close{float:right;width:30px;height:30px;border-radius:50%;background:var(--paper);border:none;font-size:16px;cursor:pointer;color:var(--muted);display:flex;align-items:center;justify-content:center;}
+.modal-close:hover{background:var(--dust);}
+.modal-step-badge{display:inline-block;padding:4px 12px;background:var(--sage-pale);color:var(--sage);border-radius:99px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;margin-bottom:10px;}
+.modal-title{font-family:'DM Serif Display',serif;font-size:22px;margin-bottom:6px;}
+.modal-subtitle{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:20px;}
+.quiz-situation-ref{background:var(--paper);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--muted);margin-bottom:20px;border-left:3px solid var(--sage);}
+.quiz-instruction{font-size:12px;font-weight:500;color:var(--ink);margin-bottom:14px;padding:10px 14px;background:var(--gold-pale);border-radius:8px;border-left:3px solid var(--gold);}
+.quiz-items{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
+.quiz-item{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border:1.5px solid var(--dust);border-radius:10px;cursor:pointer;transition:all .2s;}
+.quiz-item:hover{border-color:var(--sage);}
+.quiz-item.selected{border-color:var(--sage);background:var(--sage-pale);}
+.quiz-item.result-ok{border-color:var(--ok);background:var(--ok-pale);cursor:default;}
+.quiz-item.result-err{border-color:var(--err);background:var(--err-pale);cursor:default;}
+.quiz-item.result-missed{border-color:var(--gold);background:var(--gold-pale);cursor:default;}
+.quiz-checkbox{width:18px;height:18px;border:2px solid var(--dust);border-radius:4px;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:11px;transition:all .2s;}
+.quiz-item.selected .quiz-checkbox{background:var(--sage);border-color:var(--sage);color:#fff;}
+.quiz-item.result-ok .quiz-checkbox{background:var(--ok);border-color:var(--ok);color:#fff;}
+.quiz-item.result-err .quiz-checkbox{background:var(--err);border-color:var(--err);color:#fff;}
+.quiz-item.result-missed .quiz-checkbox{background:var(--gold);border-color:var(--gold);color:#fff;}
+.quiz-item-text{font-size:13px;line-height:1.55;flex:1;}
+.quiz-explication{font-size:11.5px;color:var(--muted);margin-top:5px;line-height:1.5;display:none;font-style:italic;}
+.quiz-item.result-ok .quiz-explication,
+.quiz-item.result-err .quiz-explication,
+.quiz-item.result-missed .quiz-explication{display:block;}
+.modal-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+.modal-score-display{display:none;padding:14px;background:var(--paper);border-radius:10px;margin-bottom:16px;text-align:center;}
+.modal-score-display.show{display:block;}
+.score-big{font-family:'DM Serif Display',serif;font-size:32px;}
+.score-big.ok{color:var(--ok);}
+.score-big.warn{color:var(--gold);}
+.score-sub{font-size:12px;color:var(--muted);margin-top:2px;}
 
-/* ── DIAGNOSIS ── */
-.diag-bar{height:14px;border-radius:7px;background:var(--border);overflow:hidden;margin:10px 0}
-.diag-fill{height:100%;border-radius:7px;transition:width 1.2s ease}
-.df-lo{background:linear-gradient(90deg,var(--terra),#e88040)}
-.df-mid{background:linear-gradient(90deg,var(--gold),#c8a02a)}
-.df-hi{background:linear-gradient(90deg,var(--forest),#4abd90)}
+/* ── Section Diagnostic ── */
+.quiz-champion-card{padding:32px;text-align:center;}
+.champion-icon{font-size:48px;margin-bottom:14px;}
 
-/* ── QUIZ ── */
-.quiz-meta{
-  display:flex;justify-content:space-between;
-  font-size:0.8rem;font-weight:700;color:var(--muted);
-  margin-bottom:16px;
-}
-.qtext{
-  font-size:1rem;font-weight:700;color:var(--navy);
-  margin-bottom:18px;line-height:1.55;
-}
-.qopts{display:flex;flex-direction:column;gap:9px}
-.qopt{
-  padding:11px 15px;
-  border:2px solid var(--border);border-radius:9px;
-  cursor:pointer;font-size:0.88rem;font-weight:600;
-  transition:all 0.2s;text-align:left;
-  background:var(--cream);font-family:'Outfit',sans-serif;
-  display:flex;align-items:flex-start;gap:10px;
-}
-.qopt-let{
-  width:26px;height:26px;border-radius:6px;
-  background:var(--border);color:var(--muted);
-  display:flex;align-items:center;justify-content:center;
-  font-size:0.78rem;font-weight:800;flex-shrink:0;
-}
-.qopt:hover:not(:disabled){border-color:var(--navy);background:#fff}
-.qopt.ok{border-color:var(--forest);background:#ecf7f3;color:#1f5e42}
-.qopt.ok .qopt-let{background:var(--forest);color:#fff}
-.qopt.bad{border-color:var(--terra);background:#fdf1ed;color:#7d2a15}
-.qopt.bad .qopt-let{background:var(--terra);color:#fff}
-.qopt:disabled{cursor:default}
-.qfb{
-  padding:11px 14px;border-radius:8px;
-  font-size:0.83rem;line-height:1.5;margin-top:12px;
-  font-family:'Source Serif 4',serif;font-style:italic;
-}
-.qfb-ok{background:#ecf7f3;color:#1f5e42;border-left:3px solid var(--forest)}
-.qfb-bad{background:#fdf1ed;color:#7d2a15;border-left:3px solid var(--terra)}
-.score-big{
-  font-size:3.5rem;font-weight:800;color:var(--navy);
-  text-align:center;letter-spacing:-0.03em;
-  margin:16px 0 8px;
-}
-.score-msg{text-align:center;color:var(--muted);font-size:0.9rem;line-height:1.5;margin-bottom:20px}
+/* ── Quiz champion ── */
+.champion-box{display:none;}
+.champion-box.active{display:block;}
+.question-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.question-num{font-size:11px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;}
+.question-score{font-size:13px;font-weight:500;color:var(--sage);}
+.question-text{font-family:'DM Serif Display',serif;font-size:17px;line-height:1.5;margin-bottom:18px;}
+.question-options{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+.q-opt{padding:11px 16px;border:1.5px solid var(--dust);border-radius:9px;font-size:13px;cursor:pointer;transition:all .2s;text-align:left;}
+.q-opt:hover:not([disabled]){border-color:var(--sage);background:var(--sage-pale);}
+.q-opt.selected{border-color:var(--sage);background:var(--sage-pale);}
+.q-opt.correct{border-color:var(--ok);background:var(--ok-pale);cursor:default;}
+.q-opt.wrong{border-color:var(--err);background:var(--err-pale);cursor:default;}
 
-/* ── UTILS ── */
-.hidden{display:none!important}
-.tc{text-align:center}
-.mt12{margin-top:12px}
-.mt20{margin-top:20px}
-.sep{height:1px;background:var(--border);margin:20px 0}
+/* ── Score final ── */
+.final-score-overlay{display:none;position:fixed;inset:0;background:rgba(26,26,46,.65);backdrop-filter:blur(6px);z-index:600;align-items:center;justify-content:center;}
+.final-score-overlay.show{display:flex;}
+.final-box{background:var(--white);border-radius:20px;max-width:440px;width:90%;padding:40px 36px;text-align:center;animation:modalIn .4s ease both;}
+.final-stars{font-size:40px;letter-spacing:6px;margin-bottom:16px;}
+.final-title{font-family:'DM Serif Display',serif;font-size:26px;margin-bottom:8px;}
+.final-sub{font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:24px;}
+
+@media(max-width:600px){
+  .situation-grid{grid-template-columns:repeat(2,1fr);}
+  .modal-inner{padding:20px 18px 24px;}
+  .nav-steps{display:none;}
+}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<div class="header">
-  <div class="header-inner">
-    <div class="header-icon">🧭</div>
-    <div class="header-text">
-      <h1>Prendre en main le Centre d'Aide Pédagogique</h1>
-      <p>Parcours de formation interactif · Formateurs bénévoles Alpha-FLE · Armée du Salut</p>
+<!-- Navigation -->
+<nav>
+  <div class="nav-inner">
+    <span class="nav-brand">KHAIRDIDACT · Armée du Salut</span>
+    <div class="nav-steps">
+      <span class="nav-step active" id="nav-1" onclick="scrollTo('sec-id')">1 · Identification</span>
+      <span class="nav-step" id="nav-2" onclick="scrollTo('sec-roue')">2 · La Roue</span>
+      <span class="nav-step" id="nav-3" onclick="scrollTo('sec-arbre')">3 · L'Arbre</span>
+      <span class="nav-step" id="nav-4" onclick="scrollTo('sec-diag')">4 · Diagnostic</span>
     </div>
   </div>
-  <div class="phase-bar">
-    <div class="pb-step active" id="pn0"><div class="pb-num">1</div><span class="pb-label">Identification</span></div>
-    <div class="pb-step" id="pn1"><div class="pb-num">2</div><span class="pb-label">La Roue</span></div>
-    <div class="pb-step" id="pn2"><div class="pb-num">3</div><span class="pb-label">L'Arbre</span></div>
-    <div class="pb-step" id="pn3"><div class="pb-num">4</div><span class="pb-label">Diagnostic & Quiz</span></div>
+</nav>
+
+<div class="page">
+
+<!-- ── SECTION 1 : IDENTIFICATION ── -->
+<section class="section" id="sec-id">
+  <div class="section-header">
+    <div class="section-icon">👋</div>
+    <div class="section-tag">Étape 1</div>
+    <h2>Bienvenue dans votre<br/><em>parcours de formation !</em></h2>
+    <p class="section-intro">Ce parcours vous guide pas à pas dans la découverte du Centre d'Aide Pédagogique KHAIRDIDACT. Présentez-vous d'abord&nbsp;: vos données seront transmises à Jotabé pour suivre votre progression.</p>
   </div>
-</div>
-
-<div class="main">
-
-<!-- ═══ PHASE 0 : IDENTIFICATION ═══ -->
-<div class="phase-view active" id="ph0">
-  <div class="card">
-    <div class="card-icon-title">
-      <div class="card-icon ci-navy">👋</div>
-      <h2>Bienvenue dans votre parcours de formation !</h2>
+  <div class="card" style="max-width:520px;margin:0 auto;">
+    <div class="form-group">
+      <label class="form-label">Votre nom complet</label>
+      <input class="form-input" id="f-nom" type="text" placeholder="Prénom Nom" oninput="checkForm()"/>
     </div>
-    <p class="card-sub">Ce parcours vous guide pas à pas dans la découverte du Centre d'Aide Pédagogique KHAIRDIDACT. Présentez-vous d'abord : vos données seront transmises à Jotabé pour suivre votre progression.</p>
-    <div class="fg">
-      <label for="inp-nom">Votre nom complet</label>
-      <input type="text" id="inp-nom" placeholder="ex. Marie Dupont">
+    <div class="form-group">
+      <label class="form-label">Votre adresse courriel</label>
+      <input class="form-input" id="f-email" type="email" placeholder="prenom.nom@exemple.com" oninput="checkForm()"/>
     </div>
-    <div class="fg">
-      <label for="inp-mail">Votre adresse courriel</label>
-      <input type="email" id="inp-mail" placeholder="ex. marie.dupont@armeedusalut.fr">
-    </div>
-    <div class="fg">
-      <label>Votre niveau d'expérience en formation bénévole</label>
-      <div class="radio-row">
-        <label class="radio-card" id="rc-deb" onclick="pickLevel('débutant')">
-          <div class="radio-dot"></div>🌱 Débutant·e
-        </label>
-        <label class="radio-card" id="rc-exp" onclick="pickLevel('expérimenté')">
-          <div class="radio-dot"></div>⭐ Expérimenté·e
-        </label>
+    <div class="form-group">
+      <label class="form-label">Votre niveau d'expérience en formation bénévole</label>
+      <div class="radio-group">
+        <label class="radio-label"><input type="radio" name="niveau" value="debutant" onchange="checkForm()"/> 🌱 Débutant·e</label>
+        <label class="radio-label"><input type="radio" name="niveau" value="experimente" onchange="checkForm()"/> ⭐ Expérimenté·e</label>
       </div>
     </div>
-    <div id="al0"></div>
-    <div class="btn-row">
-      <button class="btn btn-navy" onclick="doIdent()">Commencer mon parcours →</button>
-    </div>
+    <button class="btn-primary" id="btn-commencer" disabled onclick="commencerParcours()">Commencer mon parcours →</button>
   </div>
-</div>
+</section>
 
-<!-- ═══ PHASE 1 : ROUE ═══ -->
-<div class="phase-view" id="ph1">
-  <div class="card">
-    <div class="card-icon-title">
-      <div class="card-icon ci-terra">🎰</div>
-      <h2>La Roue des Situations de Formation</h2>
-    </div>
-    <p class="card-sub">Lancez la roue pour obtenir une situation de formation aléatoire, combinant 6 critères pédagogiques clés. Chaque tirage révèle un contexte que vous devrez analyser et dans lequel vous devrez adapter votre pédagogie.</p>
-
-    <div class="slot-wrap">
-      <div class="slot-label">⚙ Situation aléatoire — 64 combinaisons possibles</div>
-      <div class="drums-grid" id="drumsGrid"></div>
-      <div class="tc">
-        <button class="btn btn-gold" id="spinBtn" onclick="spin()">🎲 Lancer la roue !</button>
-      </div>
-    </div>
-
-    <div class="hidden" id="situResult">
-      <div class="situ-card">
-        <div class="situ-title">🗂 Votre situation de formation</div>
-        <div class="tags" id="situTags"></div>
-      </div>
-      <div class="alert alert-info mt12" id="situTip"></div>
-      <div class="btn-row" style="justify-content:center">
-        <button class="btn btn-ghost btn-sm" onclick="spin()">↺ Autre tirage</button>
-        <button class="btn btn-navy" onclick="goPhase2()">Explorer l'arbre des possibilités →</button>
+<!-- ── SECTION 2 : LA ROUE ── -->
+<section class="section" id="sec-roue" style="display:none;">
+  <div class="section-header">
+    <div class="section-icon">🎰</div>
+    <div class="section-tag">Étape 2</div>
+    <h2>La Roue des<br/><em>Situations de Formation</em></h2>
+    <p class="section-intro">Lancez la roue pour obtenir une situation de formation aléatoire, combinant 6 critères pédagogiques clés. Chaque tirage révèle un contexte que vous devrez analyser.</p>
+  </div>
+  <div class="card roue-card">
+    <div class="roue-badge">⚙ Situation aléatoire — 64 combinaisons possibles</div>
+    <br/>
+    <button class="btn-roue" id="btn-roue" onclick="lancerRoue()">🎲 Lancer la roue !</button>
+    <div class="situation-box" id="situation-box">
+      <div style="font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:14px;">🗂 Votre situation de formation</div>
+      <div class="situation-grid" id="situation-grid"></div>
+      <div class="roue-actions">
+        <button class="btn-ghost" onclick="lancerRoue()">↺ Autre tirage</button>
+        <button class="btn-next" onclick="allerArbre()">Explorer l'arbre des possibilités →</button>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- ═══ PHASE 2 : ARBRE ═══ -->
-<div class="phase-view" id="ph2">
-  <div class="card">
-    <div class="card-icon-title">
-      <div class="card-icon ci-forest">🌳</div>
-      <h2>L'Arbre des Possibilités</h2>
-    </div>
-    <p class="card-sub" id="p2sub">Avec votre situation tirée au sort, parcourez les 4 étapes de la démarche du formateur bénévole. À chaque étape : consultez le site, utilisez le conseil IA, puis validez votre progression.</p>
-    <div class="prog"><div class="prog-fill" id="treeBar" style="width:0%"></div></div>
+<!-- ── SECTION 3 : L'ARBRE ── -->
+<section class="section" id="sec-arbre" style="display:none;">
+  <div class="section-header">
+    <div class="section-icon">🌳</div>
+    <div class="section-tag">Étape 3</div>
+    <h2>L'Arbre des<br/><em>Possibilités</em></h2>
+    <p class="section-intro">Avec votre situation tirée au sort, parcourez les 4 étapes de la démarche du formateur bénévole. À chaque étape&nbsp;: consultez le conseil IA, répondez au quiz KHAIRDIDACT, puis validez votre progression.</p>
+  </div>
+  <div class="tree-steps" id="tree-steps">
+    <!-- générées par JS -->
+  </div>
+</section>
 
-    <!-- Step 1 -->
-    <div class="tstep on" id="ts1">
-      <div class="tstep-num" id="tsn1">1</div>
-      <div class="tstep-body">
-        <div class="tstep-title">📋 Évaluation initiale du groupe</div>
-        <div class="tstep-desc">Observez et évaluez vos apprenants selon les critères de votre situation : niveau de langue, degré d'alphabétisation, dynamiques de groupe. Consultez la grille CECRL et les fiches de positionnement sur KHAIRDIDACT.</div>
-        <div class="hidden ai-box" id="ai1"><div class="ai-hd">🤖 Conseiller IA</div><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>
-        <div class="tstep-acts">
-          <button class="btn btn-navy btn-sm" onclick="aiGuide(1)">🤖 Conseil IA</button>
-          <a class="btn btn-ghost btn-sm" href="https://sites.google.com/view/ecosysteme-alpa-fle/accueil" target="_blank">🌐 KHAIRDIDACT</a>
-          <button class="btn btn-forest btn-sm" onclick="valStep(1)">✅ Étape réalisée</button>
-        </div>
+<!-- ── SECTION 4 : DIAGNOSTIC ── -->
+<section class="section" id="sec-diag" style="display:none;">
+  <div class="section-header">
+    <div class="section-icon">🔬</div>
+    <div class="section-tag">Étape 4</div>
+    <h2>Votre diagnostic<br/><em>de parcours</em></h2>
+    <p class="section-intro">Tentez maintenant le quiz «&nbsp;Une Question pour un Champion&nbsp;»&nbsp;: 20 questions pour tester et consolider votre maîtrise de la démarche du formateur bénévole alpha-FLE.</p>
+  </div>
+  <div class="card quiz-champion-card">
+    <div class="champion-icon">🏆</div>
+    <button class="btn-primary" onclick="lancerQuizChampion()">Lancer le quiz champion !</button>
+    <div class="champion-box" id="champion-box">
+      <div style="height:1px;background:var(--paper-dark);margin:24px 0;"></div>
+      <div class="question-header">
+        <span class="question-num" id="q-num">Question 1 / 20</span>
+        <span class="question-score" id="q-score">Score : 0 / 0</span>
       </div>
+      <div class="question-text" id="q-text"></div>
+      <div class="question-options" id="q-opts"></div>
+      <button class="btn-next" id="btn-qnext" onclick="nextQuestion()" style="display:none;">Question suivante →</button>
     </div>
+  </div>
+  <div style="text-align:center;margin-top:24px;">
+    <a href="https://sites.google.com/view/ecosysteme-alpa-fle/accueil" target="_blank" style="font-size:12px;color:var(--sage-lite);text-decoration:none;">🌐 Retour sur KHAIRDIDACT</a>
+  </div>
+</section>
 
-    <!-- Step 2 -->
-    <div class="tstep" id="ts2">
-      <div class="tstep-num" id="tsn2">2</div>
-      <div class="tstep-body">
-        <div class="tstep-title">📚 Choix des supports pédagogiques</div>
-        <div class="tstep-desc">En fonction du profil de groupe révélé par la roue, sélectionnez des supports adaptés : supports authentiques, fiches de méthode, ressources numériques. Explorez les ressources du Centre d'Aide Pédagogique.</div>
-        <div class="hidden ai-box" id="ai2"><div class="ai-hd">🤖 Conseiller IA</div><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>
-        <div class="tstep-acts">
-          <button class="btn btn-navy btn-sm" onclick="aiGuide(2)">🤖 Conseil IA</button>
-          <a class="btn btn-ghost btn-sm" href="https://sites.google.com/view/ecosysteme-alpa-fle/accueil" target="_blank">🌐 Supports</a>
-          <button class="btn btn-forest btn-sm" onclick="valStep(2)">✅ Étape réalisée</button>
-        </div>
+</div><!-- /page -->
+
+<!-- ── MODAL QUIZ KHAIRDIDACT ── -->
+<div class="modal-overlay" id="khair-modal">
+  <div class="modal" id="khair-modal-box">
+    <div class="modal-top" id="khair-modal-top"></div>
+    <div class="modal-inner">
+      <button class="modal-close" onclick="closeKhairModal()">✕</button>
+      <div class="modal-step-badge" id="khair-step-badge"></div>
+      <div class="modal-title">Quiz KHAIRDIDACT</div>
+      <div class="modal-subtitle">Avant d'accéder au Centre d'Aide Pédagogique, validez votre compréhension de cette étape.</div>
+      <div class="quiz-situation-ref" id="khair-sit-ref"></div>
+      <div class="quiz-instruction">📋 Parmi les 10 actions ci-dessous, cochez celles que vous considérez comme des <strong>bonnes pratiques</strong> pour cette étape. (Score minimum pour valider l'étape : 7/10)</div>
+      <div class="modal-score-display" id="modal-score-display">
+        <div class="score-big" id="modal-score-big"></div>
+        <div class="score-sub" id="modal-score-sub"></div>
       </div>
-    </div>
-
-    <!-- Step 3 -->
-    <div class="tstep" id="ts3">
-      <div class="tstep-num" id="tsn3">3</div>
-      <div class="tstep-body">
-        <div class="tstep-title">⏱ Séquençage de la séance</div>
-        <div class="tstep-desc">Planifiez votre séance, isolée ou dans une progression. Structurez les phases d'accueil, découverte, entraînement et transfert. Utilisez l'outil de planification IA de KHAIRDIDACT pour construire votre déroulé.</div>
-        <div class="hidden ai-box" id="ai3"><div class="ai-hd">🤖 Conseiller IA</div><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>
-        <div class="tstep-acts">
-          <button class="btn btn-navy btn-sm" onclick="aiGuide(3)">🤖 Conseil IA</button>
-          <a class="btn btn-ghost btn-sm" href="https://sites.google.com/view/ecosysteme-alpa-fle/accueil" target="_blank">🌐 Planification</a>
-          <button class="btn btn-forest btn-sm" onclick="valStep(3)">✅ Étape réalisée</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Step 4 -->
-    <div class="tstep" id="ts4">
-      <div class="tstep-num" id="tsn4">4</div>
-      <div class="tstep-body">
-        <div class="tstep-title">📊 Prévoir les évaluations</div>
-        <div class="tstep-desc">Planifiez vos évaluations formatives (régulation en cours) et/ou sommatives (bilan). Adaptez les modalités au niveau et au contexte de votre groupe. Consultez les outils d'évaluation disponibles sur KHAIRDIDACT.</div>
-        <div class="hidden ai-box" id="ai4"><div class="ai-hd">🤖 Conseiller IA</div><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>
-        <div class="tstep-acts">
-          <button class="btn btn-navy btn-sm" onclick="aiGuide(4)">🤖 Conseil IA</button>
-          <a class="btn btn-ghost btn-sm" href="https://sites.google.com/view/ecosysteme-alpa-fle/accueil" target="_blank">🌐 Évaluations</a>
-          <button class="btn btn-forest btn-sm" onclick="valStep(4)">✅ Étape réalisée</button>
-        </div>
+      <div class="quiz-items" id="khair-quiz-items"></div>
+      <div class="modal-actions">
+        <button class="btn-primary" id="btn-valider-quiz" onclick="validerQuiz()">Valider mes réponses →</button>
+        <button class="btn-next" id="btn-ouvrir-khair" style="display:none;" onclick="ouvrirKhairdidact()">🌐 Ouvrir KHAIRDIDACT →</button>
+        <button class="btn-ghost" id="btn-retry-quiz" style="display:none;" onclick="retryQuiz()">↺ Réessayer</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ═══ PHASE 3 : DIAGNOSTIC + QUIZ ═══ -->
-<div class="phase-view" id="ph3">
-
-  <!-- Diagnosis -->
-  <div class="card" id="diagCard">
-    <div class="card-icon-title">
-      <div class="card-icon ci-gold">🔬</div>
-      <h2>Votre diagnostic de parcours</h2>
-    </div>
-    <div id="diagContent"></div>
-    <div class="sep"></div>
-    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:16px;font-family:'Source Serif 4',serif;font-style:italic">
-      Pour compléter votre formation, tentez maintenant le quiz « Une Question pour un Champion » : 20 questions tirées des ressources KHAIRDIDACT pour tester et consolider votre maîtrise de la démarche du formateur bénévole alpha-FLE.
-    </p>
-    <button class="btn btn-terra" onclick="launchQuiz()">🏆 Lancer le quiz champion !</button>
-  </div>
-
-  <!-- Quiz -->
-  <div class="card hidden" id="quizCard">
-    <div class="card-icon-title">
-      <div class="card-icon ci-terra">🏆</div>
-      <h2>Une Question pour un Champion</h2>
-    </div>
-    <div class="quiz-meta">
-      <span id="qCtr">Question 1 / 20</span>
-      <span id="qScr">Score : 0 / 0</span>
-    </div>
-    <div class="prog"><div class="prog-fill" id="qBar" style="width:5%"></div></div>
-
-    <div id="quizBody">
-      <div class="qtext" id="qQ"></div>
-      <div class="qopts" id="qOpts"></div>
-      <div class="hidden" id="qFb"></div>
-      <div class="btn-row">
-        <button class="btn btn-navy hidden" id="btnNext" onclick="nextQ()">Question suivante →</button>
-      </div>
-    </div>
-
-    <div class="hidden" id="quizEnd">
-      <div class="score-big" id="scoreBig"></div>
-      <div class="score-msg" id="scoreMsg"></div>
-      <div class="tc">
-        <button class="btn btn-ghost" onclick="replayQuiz()" style="margin-right:8px">↺ Rejouer</button>
-        <a class="btn btn-navy" href="https://sites.google.com/view/ecosysteme-alpa-fle/accueil" target="_blank">🌐 Retour sur KHAIRDIDACT</a>
-      </div>
-    </div>
+<!-- ── SCORE FINAL ── -->
+<div class="final-score-overlay" id="final-overlay">
+  <div class="final-box">
+    <div class="final-stars" id="final-stars"></div>
+    <div class="final-title" id="final-title"></div>
+    <div class="final-sub" id="final-sub"></div>
+    <button class="btn-primary" onclick="restartAll()">↺ Recommencer le parcours</button>
   </div>
 </div>
-
-</div><!-- /main -->
 
 <script>
-/* ═══════════════════════════════════
-   STATE
-════════════════════════════════════ */
-const S = {
-  nom:'', email:'', niveau:'',
-  situ: null,
-  stepsOk: 0,
-  aiUsed: 0,
+/* ══════════════════════════════════════════
+   DONNÉES
+══════════════════════════════════════════ */
+
+const CRITERES = [
+  { id:'niveau',    label:'Niveau',      values:['Alpha (pré-A1)',  'FLE (A1–A2)'] },
+  { id:'structure', label:'Structure',   values:['CHRS',           'Centre de jour'] },
+  { id:'groupe',    label:'Groupe',      values:['Homogène',       'Hétérogène'] },
+  { id:'effectif',  label:'Effectif',    values:['Petit (≤ 5)',    'Grand (6–12)'] },
+  { id:'seance',    label:'Séance',      values:['Isolée',         'En progression'] },
+  { id:'ressources',label:'Ressources',  values:['Limitées',       'Disponibles'] }
+];
+
+const TREE_STEPS = [
+  { num:1, icon:'📋', color:'#5a7fa8',
+    title:'Évaluation initiale du groupe',
+    desc:'Observez et évaluez vos apprenants selon les critères de votre situation : niveau de langue, degré d\'alphabétisation, dynamiques de groupe. Consultez la grille CECRL et les fiches de positionnement sur KHAIRDIDACT.',
+    khairUrl:'https://sites.google.com/view/ecosysteme-alpa-fle/accueil/évaluer/cecrl',
+    khairLabel:'KHAIRDIDACT – Évaluation'
+  },
+  { num:2, icon:'📚', color:'#4a8b6f',
+    title:'Choix des supports pédagogiques',
+    desc:'En fonction du profil de groupe révélé par la roue, sélectionnez des supports adaptés : supports authentiques, fiches de méthode, ressources numériques. Explorez les ressources du Centre d\'Aide Pédagogique.',
+    khairUrl:'https://sites.google.com/view/ecosysteme-alpa-fle/accueil/supports',
+    khairLabel:'KHAIRDIDACT – Supports'
+  },
+  { num:3, icon:'⏱', color:'#8b5e8b',
+    title:'Séquençage de la séance',
+    desc:'Planifiez votre séance, isolée ou dans une progression. Structurez les phases d\'accueil, découverte, entraînement et transfert. Utilisez l\'outil de planification IA de KHAIRDIDACT pour construire votre déroulé.',
+    khairUrl:'https://sites.google.com/view/ecosysteme-alpa-fle/accueil/employer-une-m%C3%A9thode',
+    khairLabel:'KHAIRDIDACT – Méthodes'
+  },
+  { num:4, icon:'📊', color:'#c97a30',
+    title:'Prévoir les évaluations',
+    desc:'Planifiez vos évaluations formatives (régulation en cours) et/ou sommatives (bilan). Adaptez les modalités au niveau et au contexte de votre groupe. Consultez les outils d\'évaluation disponibles sur KHAIRDIDACT.',
+    khairUrl:'https://sites.google.com/view/ecosysteme-alpa-fle/accueil/évaluer/valoriser-le-progrès',
+    khairLabel:'KHAIRDIDACT – Progrès'
+  }
+];
+
+const QUIZ_DATA = {
+  1: [
+    { t:"Observer discrètement les apprenants avant de commencer pour ajuster votre approche",              ok:true,  ex:"L'observation préalable est un réflexe essentiel : elle permet d'ajuster posture et rythme dès les premières minutes." },
+    { t:"Utiliser la grille CECRL pour positionner chaque apprenant sur l'échelle de compétences",         ok:true,  ex:"La grille CECRL est l'outil de référence reconnu en Alpha-FLE pour objectiver le positionnement." },
+    { t:"Commencer immédiatement par une dictée écrite pour évaluer l'orthographe",                        ok:false, ex:"Une dictée en ouverture est déstabilisante pour les apprenants en situation d'illettrisme ; elle génère blocage et peur." },
+    { t:"Proposer une activité orale de présentation pour évaluer la prise de parole spontanée",            ok:true,  ex:"L'oral est le premier levier d'évaluation, moins menaçant que l'écrit pour les publics fragilisés." },
+    { t:"Classer les apprenants visiblement par niveau devant l'ensemble du groupe",                       ok:false, ex:"Le classement public est stigmatisant et brise le climat de confiance indispensable en Alpha-FLE." },
+    { t:"Consigner vos observations dans une fiche de positionnement individuelle",                        ok:true,  ex:"Une trace écrite structurée permet un suivi rigoureux et personnalisé sur la durée du parcours." },
+    { t:"Adapter votre posture immédiatement si le groupe est plus hétérogène que prévu",                  ok:true,  ex:"La flexibilité du formateur face à la réalité du terrain est une compétence clé du formateur bénévole Alpha-FLE." },
+    { t:"Maintenir le rythme prévu même si certains apprenants semblent dépassés",                        ok:false, ex:"Imposer un rythme inadapté exclut les apprenants les plus fragiles et détruit la motivation collective." },
+    { t:"Solliciter uniquement un apprenant modèle à l'oral pour gagner du temps",                        ok:false, ex:"Chaque apprenant doit avoir une opportunité d'expression pour que l'évaluation soit représentative du groupe." },
+    { t:"Prendre en compte les ressources culturelles et linguistiques des apprenants comme point d'appui",ok:true,  ex:"Les ressources culturelles sont un levier pédagogique fondamental : partir de ce que les apprenants savent déjà." }
+  ],
+  2: [
+    { t:"Choisir des supports ancrés dans la vie quotidienne concrète des apprenants",                    ok:true,  ex:"Les supports contextualisés augmentent la mémorisation et donnent du sens à l'apprentissage." },
+    { t:"Utiliser uniquement des manuels standardisés pour garantir la cohérence pédagogique",            ok:false, ex:"Les manuels standardisés sont souvent inadaptés aux publics Alpha-FLE en situation précaire ; ils doivent être complétés ou remplacés." },
+    { t:"Adapter la taille des caractères et l'espacement pour garantir la lisibilité",                   ok:true,  ex:"Les apprenants en alphabétisation ont besoin de supports très lisibles : grands caractères, espacement généreux." },
+    { t:"Inclure des pictogrammes et images pour faciliter la compréhension des consignes",               ok:true,  ex:"Le visuel est un support essentiel pour les apprenants non scripteurs ou peu lettrés." },
+    { t:"Proposer le même support à tous les apprenants pour assurer l'équité",                           ok:false, ex:"L'équité ne signifie pas l'identité : la différenciation des supports est indispensable dans les groupes hétérogènes." },
+    { t:"Varier les formats (oral, écrit, manipulatoire) pour toucher différents profils d'apprentissage",ok:true,  ex:"La multimodalité des supports répond à la diversité des styles cognitifs du groupe." },
+    { t:"Éviter les supports authentiques car trop complexes pour les apprenants débutants",              ok:false, ex:"Les supports authentiques simplifiés (tickets, menus, panneaux, affiches) sont très motivants et ancrés dans le réel." },
+    { t:"Préparer des supports de rechange si le niveau observé diffère du prévu",                        ok:true,  ex:"La préparation de supports différenciés témoigne d'une anticipation pédagogique solide." },
+    { t:"Numériser tous les supports pour moderniser la séance",                                          ok:false, ex:"Le tout-numérique peut exclure des apprenants sans accès ou sans compétences numériques suffisantes." },
+    { t:"Co-construire certains supports avec les apprenants à partir de leurs mots et expériences",      ok:true,  ex:"Les supports co-construits renforcent l'engagement, la propriété symbolique et la mémorisation." }
+  ],
+  3: [
+    { t:"Ouvrir chaque séance par un rituel d'accueil stable pour créer un cadre sécurisant",             ok:true,  ex:"Un rituel stable rassure les apprenants fragilisés et signale le début de l'apprentissage de manière prévisible." },
+    { t:"Structurer la séance en 4 phases progressives : accueil, découverte, entraînement, transfert",   ok:true,  ex:"Ce séquencement progressif correspond aux meilleures pratiques validées en Alpha-FLE." },
+    { t:"Supprimer la phase d'accueil pour gagner davantage de temps sur le contenu",                    ok:false, ex:"La phase d'accueil est une condition sine qua non du bon déroulement avec des publics fragilisés ; la supprimer déstabilise." },
+    { t:"Prévoir des transitions claires et visibles entre chaque phase (signal, pictogramme, geste)",    ok:true,  ex:"Des transitions explicites sécurisent les apprenants en rendant la structure de la séance compréhensible." },
+    { t:"Enchaîner plusieurs notions nouvelles pour rentabiliser le temps de séance",                     ok:false, ex:"La surcharge cognitive est l'ennemi principal de l'apprentissage ; en Alpha-FLE, moins c'est plus." },
+    { t:"Inclure un moment de manipulation physique (étiquettes, cartes, objets) dans la séance",         ok:true,  ex:"La manipulation kinesthésique ancre les apprentissages durablement, surtout pour les apprenants peu scolarisés." },
+    { t:"Prévoir un bilan oral collectif pour consolider les acquis en fin de séance",                    ok:true,  ex:"Le bilan collectif consolide les acquis, valorise les progrès et prépare mentalement la séance suivante." },
+    { t:"Poursuivre la séance jusqu'au bout même si les objectifs sont atteints avant la fin",             ok:false, ex:"Mieux vaut conclure positivement avec des objectifs atteints que de diluer la réussite par des ajouts non préparés." },
+    { t:"Adapter la durée de chaque phase au rythme réel observé dans le groupe",                        ok:true,  ex:"La flexibilité temporelle est une compétence centrale du formateur bénévole Alpha-FLE." },
+    { t:"Planifier une séance identique pour tous les niveaux présents dans le groupe",                   ok:false, ex:"En groupe hétérogène, la différenciation dans le séquencement est indispensable pour ne laisser personne de côté." }
+  ],
+  4: [
+    { t:"Utiliser l'évaluation formative pour réguler la séance en temps réel",                           ok:true,  ex:"L'évaluation formative est le moteur de la régulation pédagogique ; elle permet d'ajuster sans attendre la fin." },
+    { t:"Noter les apprenants sur 20 pour les motiver à progresser",                                      ok:false, ex:"La notation chiffrée est contre-indiquée en Alpha-FLE ; elle génère stress, dévalorisation et abandon." },
+    { t:"Observer et valoriser les réussites autant que les difficultés rencontrées",                     ok:true,  ex:"Une évaluation équilibrée soutient l'estime de soi des apprenants en situation précaire, essentielle à la persévérance." },
+    { t:"Utiliser des indicateurs de progrès visuels (étoiles, tampons, badges de progression)",          ok:true,  ex:"Les indicateurs visuels de progrès sont très motivants pour les apprenants peu lettrés et valorisent le chemin parcouru." },
+    { t:"Réserver l'évaluation uniquement à la fin de la séance pour ne pas interrompre le flux",         ok:false, ex:"L'évaluation doit être continue : avant (diagnostic), pendant (formative), après (bilan) — pas seulement en fin." },
+    { t:"Co-évaluer avec les apprenants en leur montrant leurs portfolios ou carnets de progression",     ok:true,  ex:"La co-évaluation développe la métacognition et l'autonomie, compétences clés du parcours Alpha-FLE." },
+    { t:"Comparer les apprenants entre eux pour stimuler une émulation positive",                         ok:false, ex:"La comparaison entre apprenants est néfaste ; la progression doit être individuelle et personnalisée." },
+    { t:"Documenter les progrès dans une fiche de suivi individuelle accessible à la coordination",       ok:true,  ex:"Une trace de suivi structurée permet un accompagnement personnalisé et une coordination efficace du programme." },
+    { t:"Proposer uniquement des évaluations écrites car plus faciles à corriger pour le formateur",      ok:false, ex:"Les évaluations exclusivement écrites excluent les apprenants en début d'alphabétisation ; l'oral et le gestuel sont essentiels." },
+    { t:"Communiquer régulièrement les progrès observés à la coordination du programme KHAIRDIDACT",     ok:true,  ex:"Le partage des observations avec la coordination permet d'ajuster les ressources, les suivis et les orientations." }
+  ]
 };
 
-/* ═══════════════════════════════════
-   PHASE NAVIGATION
-════════════════════════════════════ */
-function toPhase(n){
-  document.querySelectorAll('.phase-view').forEach((el,i)=>{
-    el.classList.toggle('active', i===n);
-  });
-  ['pn0','pn1','pn2','pn3'].forEach((id,i)=>{
-    const el=document.getElementById(id);
-    el.classList.remove('active','done');
-    if(i<n) el.classList.add('done');
-    if(i===n) el.classList.add('active');
-  });
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-/* ═══════════════════════════════════
-   PHASE 0 — IDENTIFICATION
-════════════════════════════════════ */
-function pickLevel(v){
-  S.niveau=v;
-  document.getElementById('rc-deb').classList.toggle('sel', v==='débutant');
-  document.getElementById('rc-exp').classList.toggle('sel', v==='expérimenté');
-}
-
-async function doIdent(){
-  const nom=document.getElementById('inp-nom').value.trim();
-  const mail=document.getElementById('inp-mail').value.trim();
-  const al=document.getElementById('al0');
-
-  const show=(msg,cls)=>{al.innerHTML=`<div class="alert ${cls}"><span>${msg}</span></div>`};
-
-  if(!nom||!mail||!S.niveau){show('⚠️ Veuillez remplir tous les champs et choisir votre niveau.','alert-err');return}
-  if(!/\S+@\S+\.\S+/.test(mail)){show('⚠️ Adresse courriel non valide.','alert-err');return}
-
-  S.nom=nom; S.email=mail;
-  show('⏳ Envoi de votre inscription…','alert-warn');
-
-  /* FormSubmit.co — envoi silencieux */
-  try{
-    const fd=new FormData();
-    fd.append('Nom',nom);
-    fd.append('Courriel',mail);
-    fd.append('Niveau',S.niveau);
-    fd.append('Date',new Date().toLocaleString('fr-FR'));
-    fd.append('_subject',`[KHAIRDIDACT] Nouveau formateur inscrit : ${nom}`);
-    fd.append('_captcha','false');
-    fd.append('_template','table');
-    fd.append('_replyto',mail);
-    await fetch('https://formsubmit.co/khairdidact@gmail.com',{method:'POST',body:fd,mode:'no-cors'});
-  }catch(e){/* silent */}
-
-  show(`✅ Bienvenue <strong>${nom}</strong> ! Inscription transmise à Jotabé. Bonne exploration !`,'alert-ok');
-  setTimeout(()=>toPhase(1), 1600);
-}
-
-/* ═══════════════════════════════════
-   PHASE 1 — SLOT MACHINE
-════════════════════════════════════ */
-const CRIT=[
-  {label:'Composition', opts:['Homogène','Hétérogène']},
-  {label:'Régularité',  opts:['Éphémère','Permanent']},
-  {label:'Âge',         opts:['Adultes','Jeunes adultes']},
-  {label:'Genre',       opts:['Mixte','Non mixte']},
-  {label:'Effectif',    opts:['Petit (≤8)','Grand (>8)']},
-  {label:'Niveau',      opts:['Infra A1.1','A1.1 et +']}
+const QUIZ_CHAMPION = [
+  { q:"En Alpha-FLE, quelle est la priorité absolue en début de parcours avec un nouveau groupe ?", opts:["Distribuer le manuel de la première séance","Évaluer le niveau oral et écrit par observation et activités adaptées","Présenter le programme des 3 prochains mois","Demander aux apprenants de se présenter uniquement en français"], r:1, ex:"L'évaluation diagnostique initiale est le fondement de toute progression adaptée." },
+  { q:"Qu'est-ce que le niveau pré-A1 (Alpha) signifie sur l'échelle CECRL ?", opts:["L'apprenant comprend l'essentiel en langue quotidienne","L'apprenant n'a pas encore accès au code écrit en français","L'apprenant peut lire des textes simples","L'apprenant parle couramment avec des erreurs"], r:1, ex:"Le niveau pré-A1 désigne les personnes en situation d'illettrisme ou sans scolarisation antérieure, non encore entrées dans le code écrit." },
+  { q:"La 'dictée à l'adulte' est une technique qui consiste à :", opts:["L'adulte dicte des mots de vocabulaire aux apprenants","L'apprenant dicte oralement un texte que le formateur transcrit","Le formateur dicte un texte pendant que les apprenants copient","Les apprenants se dictent mutuellement des phrases"], r:1, ex:"La dictée à l'adulte valorise la production orale des apprenants non scripteurs en la transformant en texte écrit." },
+  { q:"Quelle est la structure de séance recommandée en Alpha-FLE ?", opts:["Explication → Exercices → Correction","Accueil → Découverte → Entraînement → Transfert","Test → Apprentissage → Évaluation","Lecture → Écriture → Oral → Bilan"], r:1, ex:"Le séquencement Accueil–Découverte–Entraînement–Transfert est validé comme le plus efficace pour les publics Alpha-FLE." },
+  { q:"Face à un groupe très hétérogène, quelle est la meilleure stratégie ?", opts:["Enseigner au niveau du groupe le plus faible pour ne laisser personne","Enseigner au niveau moyen et espérer que chacun suit","Préparer des activités différenciées pour plusieurs niveaux simultanément","Séparer le groupe en deux séances distinctes systématiquement"], r:2, ex:"La différenciation pédagogique simultanée est la réponse professionnelle à l'hétérogénéité, sans exclure ni sous-stimuler." },
+  { q:"Quel support est le plus adapté pour travailler la lecture avec des apprenants en Alpha ?", opts:["Un article de journal non modifié","Des étiquettes-mots illustrées ancrées dans le quotidien","Un extrait de roman simplifié","Un formulaire administratif en version originale"], r:1, ex:"Les étiquettes-mots illustrées permettent de relier image, son et graphie de manière concrète et manipulable." },
+  { q:"Pourquoi éviter la notation chiffrée en Alpha-FLE ?", opts:["Parce que les apprenants ne comprennent pas les chiffres","Parce qu'elle génère du stress, de la dévalorisation et freine la prise de risque","Parce que c'est interdit par la réglementation","Parce que le temps manque pour calculer les notes"], r:1, ex:"Les publics Alpha-FLE en situation précaire ont besoin de valorisation et de confiance ; la notation chiffrée est contraire à ces objectifs." },
+  { q:"La méthode socio-affective en Alpha-FLE consiste à :", opts:["Utiliser les réseaux sociaux comme support pédagogique","Partir de l'identité, de l'histoire et du vécu des apprenants comme point d'ancrage","Travailler les émotions avec des thérapies cognitives","Créer des activités de groupe compétitives"], r:1, ex:"La méthode socio-affective valorise l'identité culturelle et l'histoire personnelle comme premier support d'apprentissage." },
+  { q:"Qu'est-ce qu'une évaluation formative ?", opts:["Une évaluation qui donne une note finale","Une évaluation continue pour réguler l'apprentissage en cours de route","Une évaluation nationale standardisée","Une évaluation que l'apprenant remplit lui-même"], r:1, ex:"L'évaluation formative est au service de l'apprentissage : elle régule en temps réel sans sanctionner." },
+  { q:"En CHRS, quel critère contextuel doit particulièrement orienter vos choix pédagogiques ?", opts:["Le nombre d'heures de formation disponibles par semaine","La précarité administrative et psychologique des résidents","Le niveau d'équipement numérique de la structure","La langue maternelle majoritaire du groupe"], r:1, ex:"En CHRS, la précarité multifactorielle (logement, statut, trauma) conditionne l'attention, la disponibilité et la confiance des apprenants." },
+  { q:"La méthode inductive en phonologie consiste à :", opts:["Annoncer la règle puis donner des exemples","Observer des exemples pour construire la règle soi-même","Utiliser une induction magnétique pour enregistrer l'oral","Écouter un fichier audio sans support visuel"], r:1, ex:"La méthode inductive développe la posture de chercheur chez l'apprenant : il construit la règle à partir de l'observation." },
+  { q:"Quel est le rôle d'un 'mot-déclencheur' en Alpha-FLE ?", opts:["Un mot très difficile qui sert à tester le niveau maximal","Un mot chargé de sens pour l'apprenant, qui sert de point de départ à l'apprentissage","Un mot-outil à mémoriser par cœur","Un mot que le formateur dit pour déclencher le silence"], r:1, ex:"Le mot-déclencheur est au cœur de la méthode participative : il ancre l'apprentissage dans le sens et l'identité." },
+  { q:"Quelle est la durée idéale d'une séance d'alphabétisation selon les recommandations KHAIRDIDACT ?", opts:["30 minutes","1h30 à 2h avec pauses","3 heures sans interruption","45 minutes exactement"], r:1, ex:"Une séance de 1h30 à 2h avec une pause permet de maintenir la concentration sans épuiser les apprenants." },
+  { q:"En début de séance, le 'rituel d'accueil' a pour fonction de :", opts:["Faire l'appel pour noter les absences","Créer un cadre sécurisant et signaler symboliquement le début de l'apprentissage","Revoir tout le contenu de la séance précédente","Distribuer les supports de la journée"], r:1, ex:"Le rituel d'accueil crée un cadre prévisible et sécurisant, condition essentielle pour les publics fragilisés." },
+  { q:"Un 'carnet de bord' en Alpha-FLE est :", opts:["Un registre d'appel officiel","Un outil de métacognition où l'apprenant trace ses progrès et ses questions","Un cahier de devoirs à faire chez soi","Un document administratif de la structure"], r:1, ex:"Le carnet de bord développe la métacognition et l'autonomie en permettant à l'apprenant de se raconter son propre apprentissage." },
+  { q:"La 'méthode par projet' en Alpha-FLE implique :", opts:["Un projet de rénovation de la salle de classe","La réalisation collective d'un livrable porteur de sens (livret, affiche, recueil)","Un projet de voyage pédagogique hors de la structure","La lecture d'un roman en groupe"], r:1, ex:"La méthode par projet mobilise toutes les compétences dans un objectif concret, valorisant et socialement visible." },
+  { q:"Face à un apprenant qui refuse de prendre la parole, il est recommandé de :", opts:["L'interroger directement pour le sortir de sa réserve","Attendre que l'apprenant soit prêt et lui proposer des alternatives à l'oral","Le signaler à la direction comme apprenant difficile","L'exclure de l'activité orale"], r:1, ex:"Respecter le rythme et les limites de chaque apprenant est fondamental ; des alternatives (pointer, choisir une image) permettent la participation sans contrainte." },
+  { q:"Quel est le principal indicateur de progression en Alpha pour un apprenant non scripteur ?", opts:["Sa vitesse de copie de texte","Sa capacité à reconnaître et écrire son prénom puis des mots-repères de son environnement","Le nombre de pages du manuel couvertes","Sa participation aux activités collectives"], r:1, ex:"L'écriture autonome du prénom puis de mots-repères personnels est l'indicateur fondamental de l'entrée dans le code écrit." },
+  { q:"La 'Roue des Situations' du CAP KHAIRDIDACT combine :", opts:["4 critères pédagogiques en 16 combinaisons","6 critères pédagogiques en 64 combinaisons possibles","8 critères en 256 combinaisons","3 critères en 8 situations types"], r:1, ex:"La Roue combine 6 critères binaires, soit 2⁶ = 64 situations de formation distinctes." },
+  { q:"En Alpha-FLE, la différence entre 'illettrisme' et 'analphabétisme' est :", opts:["Il n'y a aucune différence, ce sont des synonymes","L'illettré a été scolarisé mais a perdu l'usage de l'écrit ; l'analphabète n'a jamais été scolarisé","L'analphabète parle français, l'illettré non","L'illettrisme ne concerne que les adultes, l'analphabétisme les enfants"], r:1, ex:"Cette distinction est fondamentale en Alpha-FLE : les profils, les besoins et les approches pédagogiques diffèrent selon le parcours de chacun." }
 ];
-const REPS=7; // repetitions per drum → REPS*2 items
-let drumRes=new Array(6).fill(0), spinning=false;
 
-function buildDrums(){
-  const g=document.getElementById('drumsGrid');
-  g.innerHTML='';
-  CRIT.forEach((c,i)=>{
-    const items=[];
-    for(let r=0;r<REPS;r++) items.push(...c.opts);
-    g.innerHTML+=`
-    <div class="drum-wrap">
-      <div class="drum-crit">${c.label}</div>
-      <div class="drum-win">
-        <div class="drum-strip" id="dr${i}">
-          ${items.map(o=>`<div class="drum-item">${o}</div>`).join('')}
+/* ══════════════════════════════════════════
+   ÉTAT
+══════════════════════════════════════════ */
+let STATE = {
+  formateur: { nom:'', email:'', niveau:'' },
+  situation: null,
+  stepScores: { 1:null, 2:null, 3:null, 4:null },
+  stepDone:   { 1:false, 2:false, 3:false, 4:false },
+  currentQuizStep: null,
+  currentQuizSelections: new Set(),
+  currentQuizValidated: false,
+  championQ: 0,
+  championScore: 0,
+  currentKhairUrl: ''
+};
+
+/* ══════════════════════════════════════════
+   ÉTAPE 1 : IDENTIFICATION
+══════════════════════════════════════════ */
+function checkForm() {
+  const nom = document.getElementById('f-nom').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  const niveau = document.querySelector('input[name="niveau"]:checked');
+  document.getElementById('btn-commencer').disabled = !(nom && email && niveau);
+}
+
+function commencerParcours() {
+  STATE.formateur.nom   = document.getElementById('f-nom').value.trim();
+  STATE.formateur.email = document.getElementById('f-email').value.trim();
+  STATE.formateur.niveau= document.querySelector('input[name="niveau"]:checked').value;
+  document.getElementById('sec-roue').style.display = '';
+  document.getElementById('nav-2').classList.add('active');
+  document.getElementById('sec-roue').scrollIntoView({ behavior:'smooth' });
+}
+
+/* ══════════════════════════════════════════
+   ÉTAPE 2 : LA ROUE
+══════════════════════════════════════════ */
+function lancerRoue() {
+  const btn = document.getElementById('btn-roue');
+  btn.classList.add('spinning');
+  setTimeout(() => {
+    btn.classList.remove('spinning');
+    const sit = {};
+    CRITERES.forEach(c => { sit[c.id] = c.values[Math.floor(Math.random()*2)]; });
+    STATE.situation = sit;
+    renderSituation(sit);
+    document.getElementById('situation-box').classList.add('show');
+  }, 600);
+}
+
+function renderSituation(sit) {
+  const grid = document.getElementById('situation-grid');
+  grid.innerHTML = CRITERES.map(c => `
+    <div class="critere-chip">
+      <div class="critere-label">${c.label}</div>
+      <div class="critere-val">${sit[c.id]}</div>
+    </div>`).join('');
+}
+
+function allerArbre() {
+  document.getElementById('sec-arbre').style.display = '';
+  document.getElementById('nav-3').classList.add('active');
+  buildArbre();
+  document.getElementById('sec-arbre').scrollIntoView({ behavior:'smooth' });
+}
+
+function getSituationText() {
+  if (!STATE.situation) return '';
+  return CRITERES.map(c => `${c.label} : ${STATE.situation[c.id]}`).join(' | ');
+}
+
+/* ══════════════════════════════════════════
+   ÉTAPE 3 : L'ARBRE
+══════════════════════════════════════════ */
+function buildArbre() {
+  const container = document.getElementById('tree-steps');
+  container.innerHTML = TREE_STEPS.map(s => buildStepHTML(s)).join('');
+}
+
+function buildStepHTML(s) {
+  return `
+  <div class="tree-step" id="ts-${s.num}">
+    <div class="tree-step-header">
+      <div class="step-num">${s.num}</div>
+      <div><span class="step-icon">${s.icon}</span><span class="step-title">${s.title}</span></div>
+      <div class="step-status" id="ss-${s.num}"></div>
+    </div>
+    <div class="step-body">
+      <p class="step-desc">${s.desc}</p>
+      <div class="step-divider"></div>
+      <div class="step-actions">
+        <button class="btn-ia" id="btn-ia-${s.num}" onclick="toggleIA(${s.num})">🤖 Conseil IA</button>
+        <button class="btn-khair" onclick="openKhairQuiz(${s.num},'${s.khairUrl}')">🌐 ${s.khairLabel}</button>
+        <button class="btn-etape" id="btn-etape-${s.num}" onclick="marquerEtape(${s.num})">
+          ✅ Étape réalisée
+          <span class="score-gate-badge" id="gate-badge-${s.num}">0/10</span>
+        </button>
+      </div>
+      <div class="ia-panel" id="ia-panel-${s.num}">
+        <div class="ia-panel-header">
+          <div class="ia-dot"></div>
+          <div class="ia-panel-title">Conseil IA · Situation contextuelle · 20 points de guidance</div>
+        </div>
+        <div class="ia-content" id="ia-content-${s.num}">
+          <div class="ia-loading">Génération en cours</div>
         </div>
       </div>
-    </div>`;
-  });
+    </div>
+  </div>`;
 }
 
-function spin(){
-  if(spinning)return;
-  spinning=true;
-  document.getElementById('situResult').classList.add('hidden');
-  const btn=document.getElementById('spinBtn');
-  btn.disabled=true; btn.textContent='🎲 En cours…';
-
-  drumRes=CRIT.map(c=>Math.floor(Math.random()*c.opts.length));
-
-  CRIT.forEach((c,i)=>{
-    const el=document.getElementById(`dr${i}`);
-    el.style.transition='none';
-    el.style.transform='translateY(0)';
-    void el.offsetHeight;
-    const target=(REPS-2)*2 + drumRes[i]; // land near end of strip
-    setTimeout(()=>{
-      el.style.transition=`transform ${2.2+i*0.25}s cubic-bezier(0.12,0.56,0.3,1.0)`;
-      el.style.transform=`translateY(-${target*68}px)`;
-    }, 40+i*60);
-  });
-
-  setTimeout(()=>{
-    spinning=false; btn.disabled=false; btn.textContent='🎲 Lancer la roue !';
-    S.situ=CRIT.map((c,i)=>({crit:c.label, val:c.opts[drumRes[i]]}));
-    showSitu();
-  }, 3500+CRIT.length*250);
-}
-
-function showSitu(){
-  const tags=document.getElementById('situTags');
-  tags.innerHTML=S.situ.map((s,i)=>`<span class="tag t${i}">${s.crit} : <strong>${s.val}</strong></span>`).join('');
-
-  const infra=S.situ[5].val==='Infra A1.1';
-  const eph=S.situ[1].val==='Éphémère';
-  const het=S.situ[0].val==='Hétérogène';
-  const grand=S.situ[4].val.startsWith('Grand');
-
-  let tip='💡 ';
-  if(infra&&het&&eph) tip+='Situation très complexe : groupe non alphabétisé, hétérogène et irrégulier. Prévoyez des activités autonomes, modulaires et sans prérequis.';
-  else if(infra&&eph) tip+='Groupe en phase d\'alphabétisation, fréquentation irrégulière : chaque séance doit être auto-suffisante et privilégier le geste graphique.';
-  else if(het&&grand) tip+='Grand groupe hétérogène : les ateliers tournants et la différenciation seront vos meilleurs alliés.';
-  else if(infra) tip+='Niveau infra A1.1 : priorité à la conscience phonologique, à la motricité fine et à la découverte du principe alphabétique.';
-  else if(eph) tip+='Groupe éphémère : adaptez des activités "clés en main" sans dépendance aux séances précédentes.';
-  else tip+='Situation identifiée ! Passez à l\'arbre des possibilités pour explorer les stratégies adaptées.';
-
-  document.getElementById('situTip').textContent=tip;
-  document.getElementById('situResult').classList.remove('hidden');
-}
-
-/* ═══════════════════════════════════
-   PHASE 2 — ARBRE
-════════════════════════════════════ */
-function goPhase2(){
-  toPhase(2);
-  if(S.situ){
-    const s=S.situ.map(x=>`${x.crit} : ${x.val}`).join(' · ');
-    document.getElementById('p2sub').textContent=`Situation : ${s}. Parcourez les 4 étapes ci-dessous. À chaque étape, consultez KHAIRDIDACT, obtenez un conseil IA adapté à votre situation, puis validez.`;
+/* ── Conseil IA ── */
+async function toggleIA(stepNum) {
+  const panel = document.getElementById(`ia-panel-${stepNum}`);
+  const btn   = document.getElementById(`btn-ia-${stepNum}`);
+  if (panel.classList.contains('open')) {
+    panel.classList.remove('open');
+    panel.style.display = 'none';
+    return;
   }
+  panel.style.display = 'block';
+  panel.classList.add('open');
+  btn.classList.add('loading');
+  btn.textContent = '🤖 Génération…';
+  await loadIAContent(stepNum);
+  btn.classList.remove('loading');
+  btn.textContent = '🤖 Conseil IA';
 }
 
-const STEP_NAMES=['','évaluation initiale du groupe d\'apprenants','choix des supports pédagogiques adaptés','séquençage et structuration de la séance','prévision et mise en œuvre des évaluations'];
+async function loadIAContent(stepNum) {
+  const contentEl = document.getElementById(`ia-content-${stepNum}`);
+  const step = TREE_STEPS.find(s => s.num === stepNum);
+  const sitText = getSituationText();
+  const stepContexts = {
+    1:"l'observation et l'évaluation diagnostique des apprenants, le positionnement CECRL, et l'adaptation de l'approche pédagogique au profil du groupe",
+    2:"le choix et l'adaptation de supports pédagogiques (authentiques, fabriqués, numériques) en tenant compte du profil de groupe",
+    3:"la structuration de la séance en phases cohérentes (accueil, découverte, entraînement, transfert) et l'adaptation du séquencement au contexte",
+    4:"la planification des évaluations formatives et sommatives adaptées au niveau et au contexte du groupe"
+  };
 
-async function aiGuide(n){
-  const box=document.getElementById(`ai${n}`);
-  box.classList.remove('hidden');
-  box.innerHTML=`<div class="ai-hd">🤖 Conseiller pédagogique IA <span style="font-weight:400;opacity:0.6">— analyse…</span></div><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>`;
-
-  const situ=S.situ ? S.situ.map(x=>`${x.crit}: ${x.val}`).join(', ') : 'non définie';
-
-  const prompt=`Tu es un conseiller pédagogique expert en alphabétisation et FLE au sein de l'Armée du Salut.
-
-Un formateur bénévole (profil : ${S.niveau || 'non précisé'}) doit gérer cette situation : ${situ}.
-
-Donne-lui des conseils PRATIQUES, CONCIS et DIRECTEMENT APPLICABLES (4-5 phrases max) pour l'étape : **${STEP_NAMES[n]}**.
-
-Sois bienveillant, direct et pragmatique. Donne des pistes concrètes adaptées précisément à cette situation. Si pertinent, signale des ressources spécifiques disponibles sur la plateforme KHAIRDIDACT (roue des méthodes, fiches, outil IA, grilles CECRL). Formate ta réponse en texte fluide sans listes à puces.`;
-
-  try{
-    const r=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
+  try {
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
       body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:350,
-        messages:[{role:'user',content:prompt}]
+        model:"claude-sonnet-4-20250514",
+        max_tokens:1000,
+        system:`Tu es Jotabé, coordinateur pédagogique expert du programme KHAIRDIDACT de l'Armée du Salut, spécialisé en formation de formateurs bénévoles Alpha-FLE pour publics en situation précaire (CHRS, centres de jour). Tu fournis une guidance pédagogique forte, concrète et contextualisée.`,
+        messages:[{
+          role:"user",
+          content:`Fournis exactement 20 lignes de guidance pédagogique forte et concrète pour l'étape "${step.title}", dans ce contexte précis de situation de formation : ${sitText}. Chaque ligne commence par un verbe d'action à l'impératif. Sois précis, ancré dans la réalité Alpha-FLE, pratique et inspirant. Réponds UNIQUEMENT avec les 20 lignes numérotées (1. à 20.), sans titre, sans introduction, sans conclusion.`
+        }]
       })
     });
-    const d=await r.json();
-    const txt=d.content?.[0]?.text||'Conseil indisponible pour le moment.';
-    box.innerHTML=`<div class="ai-hd">🤖 Conseil pour votre situation</div><div>${txt.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>')}</div>`;
-    S.aiUsed++;
-  }catch(e){
-    box.innerHTML=`<div class="ai-hd">🤖 Conseiller IA</div><p>Conseil temporairement indisponible. Consultez directement KHAIRDIDACT pour cette étape.</p>`;
+    const data = await response.json();
+    const text = data.content[0].text;
+    const lines = text.split('\n').filter(l => l.trim() && /^\d+\./.test(l.trim()));
+    if (lines.length > 0) {
+      contentEl.innerHTML = lines.map((l,i) => {
+        const clean = l.replace(/^\d+\.\s*/,'');
+        return `<div class="ia-line" data-n="${i+1}">${clean}</div>`;
+      }).join('');
+    } else {
+      contentEl.innerHTML = `<div style="color:#9ca3c4;font-style:italic;">${text}</div>`;
+    }
+  } catch(e) {
+    contentEl.innerHTML = generateFallbackAdvice(stepNum, STATE.situation);
   }
 }
 
-let stepsOk=0;
-function valStep(n){
-  const ts=document.getElementById(`ts${n}`);
-  ts.classList.remove('on'); ts.classList.add('done');
-  document.getElementById(`tsn${n}`).textContent='✓';
-  stepsOk=Math.max(stepsOk,n);
-  S.stepsOk=stepsOk;
-  document.getElementById('treeBar').style.width=`${n*25}%`;
-  if(n<4){
-    const next=document.getElementById(`ts${n+1}`);
-    next.classList.add('on');
-    next.scrollIntoView({behavior:'smooth',block:'nearest'});
+function generateFallbackAdvice(stepNum, sit) {
+  const banks = {
+    1:[
+      "Observer discrètement le groupe pendant 5 minutes avant d'intervenir",
+      "Utiliser la grille CECRL de positionnement dès la première séance",
+      "Proposer une activité orale courte pour évaluer la prise de parole",
+      "Consigner vos observations dans une fiche individuelle dès le premier contact",
+      "Adapter votre registre de langue au niveau détecté",
+      "Repérer les dynamiques de groupe : leaders, personnes en retrait, binômes spontanés",
+      "Identifier les ressources culturelles de chaque apprenant comme leviers pédagogiques",
+      "Différencier votre évaluation selon le degré d'alphabétisation de chacun",
+      "Prévoir un temps de parole pour chaque apprenant dès l'évaluation initiale",
+      "Éviter toute comparaison publique des apprenants entre eux",
+      "Créer un climat de confiance avant de demander une production écrite",
+      "Utiliser des images comme support de l'évaluation orale initiale",
+      "Repérer les besoins spécifiques liés au contexte de la structure d'accueil",
+      "Adapter votre rythme au groupe le plus fragile sans le ralentir excessivement",
+      "Construire une fiche de groupe synthétique à partager avec la coordination",
+      "Anticiper les ajustements nécessaires si le groupe est plus hétérogène que prévu",
+      "Valoriser verbalement chaque participation, même minimale",
+      "Tester la reconnaissance de quelques mots-repères courants",
+      "Repérer les apprenants susceptibles de bénéficier d'un accompagnement renforcé",
+      "Planifier votre séance 2 immédiatement après l'évaluation pour capitaliser les données"
+    ],
+    2:[
+      "Sélectionner des supports ancrés dans le quotidien immédiat des apprenants",
+      "Agrandir les caractères à 16pt minimum pour les documents imprimés",
+      "Inclure systématiquement des pictogrammes pour les consignes",
+      "Préparer des étiquettes-mots manipulables pour les activités de tri",
+      "Éviter les manuels standardisés non adaptés au contexte précaire",
+      "Varier les formats : oral, écrit, manipulatoire, numérique si disponible",
+      "Co-construire au moins un support avec le groupe pour renforcer l'engagement",
+      "Préparer deux niveaux de supports pour les groupes hétérogènes",
+      "Utiliser des supports authentiques simplifiés : tickets, menus, affiches",
+      "Photographier les productions du groupe pour les intégrer aux supports suivants",
+      "Créer des fiches-mots illustrées réutilisables d'une séance à l'autre",
+      "Adapter le lexique des consignes au niveau linguistique observé",
+      "Tester la lisibilité du support en demandant à un apprenant de lire à voix haute",
+      "Prévoir un support de secours si le niveau est inférieur à l'anticipé",
+      "Limiter le contenu d'une fiche à 5-7 éléments maximum pour éviter la surcharge",
+      "Relier chaque support à une situation de vie réelle identifiable par les apprenants",
+      "Archiver les supports produits pour constituer une ressource réutilisable",
+      "Solliciter les apprenants dans le choix des images et des mots illustrés",
+      "Vérifier que les supports sont accessibles aux apprenants avec des difficultés visuelles",
+      "Évaluer l'efficacité de chaque support à la fin de la séance et noter pour améliorer"
+    ],
+    3:[
+      "Ouvrir chaque séance par le même rituel d'accueil pour sécuriser le groupe",
+      "Énoncer oralement la structure de la séance dès le début",
+      "Utiliser un support visuel (tableau, pictogrammes) pour matérialiser les étapes",
+      "Limiter chaque séance à 1 à 2 objectifs pédagogiques clairs et mesurables",
+      "Prévoir 15 minutes pour l'accueil et la mise en train",
+      "Structurer la phase de découverte autour d'une situation-problème concrète",
+      "Alterner moments collectifs et moments de travail individuel ou en binôme",
+      "Signaler chaque transition de phase par un signal visuel ou sonore",
+      "Préserver 10 minutes pour le bilan collectif en fin de séance",
+      "Adapter la durée de l'entraînement selon le rythme réel du groupe",
+      "Inclure au moins une manipulation physique (cartes, étiquettes, objets) par séance",
+      "Anticiper les apprenants susceptibles de terminer en avance et préparer une extension",
+      "Prévoir une activité de repli si la séance se déroule plus vite que prévu",
+      "Éviter de surcharger la phase de transfert si le groupe semble fatigué",
+      "Lier explicitement la séance à la précédente pour ancrer la progression",
+      "Clore la séance par une formule rituelle de fin (bilan positif, annonce de la suite)",
+      "Documenter le déroulé réel de la séance pour ajuster le séquencement futur",
+      "Demander aux apprenants ce qu'ils retiennent avant de fermer la séance",
+      "Varier les modalités de travail d'une séance à l'autre pour maintenir la motivation",
+      "Synchroniser votre séquencement avec les ressources disponibles dans la structure"
+    ],
+    4:[
+      "Utiliser l'observation directe comme premier outil d'évaluation formative",
+      "Mettre en place un carnet de bord individuel dès le début du parcours",
+      "Prévoir des moments d'auto-évaluation guidée par des pictogrammes d'émotion",
+      "Documenter chaque progrès même minime dans la fiche de suivi individuelle",
+      "Utiliser des tampons ou badges visuels pour marquer les paliers de progression",
+      "Proposer une évaluation orale avant toute évaluation écrite",
+      "Co-évaluer régulièrement avec les apprenants pour développer la métacognition",
+      "Partager les observations de progression avec la coordination au moins mensuellement",
+      "Adapter le format de l'évaluation au niveau de chaque apprenant",
+      "Éviter la notation chiffrée en faveur d'indicateurs qualitatifs positifs",
+      "Repérer les progrès en compréhension orale même chez les apprenants non scripteurs",
+      "Valoriser verbalement chaque réussite immédiatement et devant le groupe",
+      "Distinguer évaluation formative (en cours) et sommative (bilan de palier)",
+      "Utiliser des grilles d'observation simplifiées pour les évaluations en groupe",
+      "Prévoir une évaluation de palier tous les 8 à 10 séances",
+      "Construire un portfolio de progression visuel accessible aux apprenants",
+      "Communiquer les résultats positifs aux structures partenaires avec l'accord des apprenants",
+      "Réviser vos objectifs pédagogiques en fonction des résultats des évaluations",
+      "Former un binôme d'apprenants expérimentés pour s'évaluer mutuellement",
+      "Terminer chaque évaluation par une projection positive vers les prochains objectifs"
+    ]
+  };
+  const lines = banks[stepNum] || banks[1];
+  return lines.map((l,i) => `<div class="ia-line" data-n="${i+1}">${l}</div>`).join('');
+}
+
+/* ══════════════════════════════════════════
+   QUIZ KHAIRDIDACT (modal 10 cases)
+══════════════════════════════════════════ */
+const STEP_COLORS = { 1:'#5a7fa8', 2:'#4a8b6f', 3:'#8b5e8b', 4:'#c97a30' };
+const STEP_NAMES  = { 1:'Évaluation initiale', 2:'Choix des supports', 3:'Séquençage', 4:'Évaluations' };
+
+function openKhairQuiz(stepNum, khairUrl) {
+  STATE.currentQuizStep = stepNum;
+  STATE.currentQuizSelections = new Set();
+  STATE.currentQuizValidated = false;
+  STATE.currentKhairUrl = khairUrl;
+
+  document.getElementById('khair-modal-top').style.background = STEP_COLORS[stepNum];
+  document.getElementById('khair-step-badge').textContent = `Étape ${stepNum} · ${STEP_NAMES[stepNum]}`;
+  document.getElementById('khair-sit-ref').textContent = '📍 Situation : ' + getSituationText();
+
+  const itemsEl = document.getElementById('khair-quiz-items');
+  const items   = QUIZ_DATA[stepNum];
+  const shuffled = [...items].sort(() => Math.random() - .5);
+  STATE._quizOrder = shuffled;
+
+  itemsEl.innerHTML = shuffled.map((item,i) => `
+    <div class="quiz-item" id="qi-${i}" onclick="toggleQuizItem(${i})">
+      <div class="quiz-checkbox" id="qcb-${i}"></div>
+      <div style="flex:1">
+        <div class="quiz-item-text">${item.t}</div>
+        <div class="quiz-explication" id="qex-${i}"></div>
+      </div>
+    </div>`).join('');
+
+  document.getElementById('modal-score-display').classList.remove('show');
+  document.getElementById('btn-valider-quiz').style.display = 'inline-flex';
+  document.getElementById('btn-ouvrir-khair').style.display = 'none';
+  document.getElementById('btn-retry-quiz').style.display = 'none';
+  document.getElementById('khair-modal').classList.add('open');
+}
+
+function toggleQuizItem(i) {
+  if (STATE.currentQuizValidated) return;
+  if (STATE.currentQuizSelections.has(i)) {
+    STATE.currentQuizSelections.delete(i);
+    document.getElementById(`qi-${i}`).classList.remove('selected');
+    document.getElementById(`qcb-${i}`).textContent = '';
   } else {
-    setTimeout(()=>{toPhase(3);buildDiag();}, 700);
+    STATE.currentQuizSelections.add(i);
+    document.getElementById(`qi-${i}`).classList.add('selected');
+    document.getElementById(`qcb-${i}`).textContent = '✓';
   }
 }
 
-/* ═══════════════════════════════════
-   PHASE 3 — DIAGNOSTIC
-════════════════════════════════════ */
-function buildDiag(){
-  const ai=S.aiUsed, ok=S.stepsOk;
-  const pct=Math.min(100, ok*20 + ai*5);
-  let lvl, cls, msg, conseil;
-  if(ok===4&&ai>=3){
-    lvl='🌟 Maîtrise du parcours'; cls='df-hi';
-    msg='Félicitations ! Vous avez parcouru l\'ensemble du site, utilisé le conseiller IA et complété toutes les étapes. Vous avez une excellente appropriation du Centre d\'Aide Pédagogique.';
-    conseil='Partagez votre expérience dans la communauté WhatsApp KHAIRDIDACT et explorez les ressources avancées.';
-  } else if(ok===4){
-    lvl='✅ Parcours complet'; cls='df-hi';
-    msg='Excellent ! Vous avez validé les 4 étapes de la démarche. Pour aller plus loin, pensez à utiliser le conseiller IA pour chaque situation inédite.';
-    conseil='Revisitez les fiches méthodes et l\'outil de planification IA pour affiner encore votre pratique.';
-  } else if(ok>=2){
-    lvl='🔄 Exploration en cours'; cls='df-mid';
-    msg=`Vous avez réalisé ${ok}/4 étapes. C'est un bon début dans l'exploration du site !`;
-    conseil='Reprenez le parcours pour compléter les étapes manquantes et vous familiariser avec toutes les ressources disponibles.';
-  } else {
-    lvl='🌱 Exploration à poursuivre'; cls='df-lo';
-    msg='Vous commencez votre exploration du Centre d\'Aide Pédagogique. Chaque étape apporte des ressources et des outils précieux.';
-    conseil='Prenez le temps de naviguer sur KHAIRDIDACT à chaque étape : les ressources sont là pour vous !';
+function validerQuiz() {
+  if (STATE.currentQuizValidated) return;
+  STATE.currentQuizValidated = true;
+  const items = STATE._quizOrder;
+  let score = 0;
+
+  items.forEach((item,i) => {
+    const selected = STATE.currentQuizSelections.has(i);
+    const correct  = item.ok;
+    const el  = document.getElementById(`qi-${i}`);
+    const cbEl = document.getElementById(`qcb-${i}`);
+    const exEl = document.getElementById(`qex-${i}`);
+
+    el.onclick = null;
+    exEl.textContent = item.ex;
+
+    if (correct && selected) {
+      score++;
+      el.className = 'quiz-item result-ok';
+      cbEl.textContent = '✓';
+    } else if (!correct && !selected) {
+      score++;
+      el.className = 'quiz-item result-ok';
+      cbEl.textContent = '✓';
+    } else if (correct && !selected) {
+      el.className = 'quiz-item result-missed';
+      cbEl.textContent = '!';
+    } else {
+      el.className = 'quiz-item result-err';
+      cbEl.textContent = '✗';
+    }
+  });
+
+  STATE.stepScores[STATE.currentQuizStep] = score;
+  updateGateBadge(STATE.currentQuizStep, score);
+
+  const scoreEl  = document.getElementById('modal-score-big');
+  const subEl    = document.getElementById('modal-score-sub');
+  const scoreBox = document.getElementById('modal-score-display');
+  scoreEl.textContent = `${score} / 10`;
+  scoreEl.className   = `score-big ${score>=7?'ok':'warn'}`;
+  subEl.textContent   = score>=7
+    ? '✅ Score suffisant — vous pouvez valider cette étape !'
+    : `⚠ Score insuffisant (minimum 7/10). Réessayez ou révisez la guidance IA.`;
+  scoreBox.classList.add('show');
+
+  document.getElementById('btn-valider-quiz').style.display = 'none';
+  document.getElementById('btn-ouvrir-khair').style.display = 'inline-flex';
+  if (score < 7) document.getElementById('btn-retry-quiz').style.display = 'inline-block';
+
+  sendResultsByMail(STATE.currentQuizStep, score, items);
+}
+
+function updateGateBadge(stepNum, score) {
+  const badge = document.getElementById(`gate-badge-${stepNum}`);
+  const btnEtape = document.getElementById(`btn-etape-${stepNum}`);
+  if (badge) badge.textContent = `${score}/10`;
+  if (score >= 7) {
+    btnEtape.classList.add('unlocked');
+  }
+}
+
+function retryQuiz() {
+  openKhairQuiz(STATE.currentQuizStep, STATE.currentKhairUrl);
+}
+
+function ouvrirKhairdidact() {
+  window.open(STATE.currentKhairUrl, '_blank');
+  closeKhairModal();
+}
+
+function closeKhairModal() {
+  document.getElementById('khair-modal').classList.remove('open');
+}
+
+function sendResultsByMail(stepNum, score, items) {
+  const f = STATE.formateur;
+  const sitText = getSituationText();
+  const stepName = STEP_NAMES[stepNum];
+  const resultLines = items.map((item,i) => {
+    const selected = STATE.currentQuizSelections.has(i);
+    const ok = item.ok ? 'VRAI' : 'FAUX';
+    const rep = selected ? 'Coché' : 'Non coché';
+    return `[${ok}/${rep}] ${item.t}`;
+  }).join('\n');
+
+  const subject = encodeURIComponent(`[KHAIRDIDACT] Quiz Étape ${stepNum} — ${f.nom} — Score : ${score}/10`);
+  const body = encodeURIComponent(
+    `RAPPORT DE QUIZ KHAIRDIDACT\n` +
+    `==============================\n\n` +
+    `Formateur : ${f.nom}\n` +
+    `Courriel  : ${f.email}\n` +
+    `Expérience: ${f.niveau}\n\n` +
+    `Étape     : ${stepNum} — ${stepName}\n` +
+    `Situation : ${sitText}\n\n` +
+    `Score     : ${score} / 10\n\n` +
+    `DÉTAIL DES RÉPONSES :\n` +
+    `${resultLines}\n\n` +
+    `Date : ${new Date().toLocaleString('fr-FR')}`
+  );
+
+  const mailLink = document.createElement('a');
+  mailLink.href = `mailto:khairdidact@gmail.com?subject=${subject}&body=${body}`;
+  mailLink.click();
+}
+
+/* ══════════════════════════════════════════
+   ÉTAPE RÉALISÉE (score gate)
+══════════════════════════════════════════ */
+function marquerEtape(stepNum) {
+  const score = STATE.stepScores[stepNum];
+  const btn   = document.getElementById(`btn-etape-${stepNum}`);
+  const ss    = document.getElementById(`ss-${stepNum}`);
+
+  if (score === null || score < 7) {
+    btn.classList.add('flash-red');
+    setTimeout(() => btn.classList.remove('flash-red'), 1300);
+    if (score === null) {
+      alert('Vous devez d\'abord effectuer le quiz KHAIRDIDACT pour cette étape (score minimum : 7/10).');
+    } else {
+      alert(`Score actuel : ${score}/10. Il faut au moins 7/10 pour valider cette étape. Cliquez sur le bouton KHAIRDIDACT pour réessayer le quiz.`);
+    }
+    return;
   }
 
-  document.getElementById('diagContent').innerHTML=`
-    <div style="font-size:1.1rem;font-weight:800;color:var(--navy);margin-bottom:6px">${lvl}</div>
-    <div class="diag-bar"><div class="diag-fill ${cls}" style="width:0%" id="diagFill"></div></div>
-    <p style="font-size:0.875rem;margin:10px 0;line-height:1.6;font-family:'Source Serif 4',serif">${msg}</p>
-    <div class="alert alert-info"><span>💡 ${conseil}</span></div>
-    <p style="font-size:0.75rem;color:var(--muted);margin-top:8px">Étapes validées : ${ok}/4 · Conseil IA utilisé : ${ai} fois · Formateur : ${S.nom} (${S.niveau})</p>
-  `;
-  setTimeout(()=>{
-    const f=document.getElementById('diagFill');
-    if(f) f.style.width=pct+'%';
-  },300);
-}
+  STATE.stepDone[stepNum] = true;
+  btn.classList.add('flash-green');
+  ss.classList.add('done-ok');
+  ss.textContent = '✓';
 
-/* ═══════════════════════════════════
-   QUIZ
-════════════════════════════════════ */
-const QQ=[
-  {q:"Le CECRL (Cadre Européen Commun de Référence pour les Langues) distingue 6 niveaux. Quel niveau spécifique est utilisé pour l'alphabétisation, en deçà du A1 standard ?",
-   o:["Pré-A1 / A1.1","Niveau Z","Alpha 0","Fondamental 1"],ans:0,
-   fb:"Le niveau A1.1 (ou pré-A1) est reconnu dans le référentiel DILF pour les apprenants qui entrent dans la langue écrite. Au-dessous, on parle d'infra A1.1 pour les non-alphabétisés."},
-  {q:"Un apprenant « infra A1.1 » en contexte alpha-FLE se caractérise principalement par :",
-   o:["Un niveau débutant standard en FLE","Une absence de maîtrise du système alphabétique dans toute langue","Des difficultés uniquement à l'écrit en français","Un niveau intermédiaire à l'oral"],ans:1,
-   fb:"Infra A1.1 désigne une personne qui n'a pas encore acquis le principe alphabétique, que ce soit dans sa langue maternelle ou en français."},
-  {q:"Dans les centres Armée du Salut (CHRS, centres de jour), un groupe « éphémère » désigne :",
-   o:["Un groupe qui apprend très rapidement","Un groupe à fréquentation irrégulière et imprévisible","Un groupe de moins de 5 personnes","Un groupe qui se dissoudra dans 3 mois"],ans:1,
-   fb:"Les contraintes de vie des personnes en situation précaire (démarches administratives, déménagements, hospitalisations…) rendent souvent la fréquentation irrégulière."},
-  {q:"La différenciation pédagogique consiste à :",
-   o:["Donner exactement le même exercice à tous les apprenants","Adapter les contenus, démarches ou productions aux besoins individuels au sein du groupe","Séparer définitivement les apprenants par niveau dans des groupes distincts","Enseigner plus lentement pour les apprenants en difficulté"],ans:1,
-   fb:"La différenciation répond aux différents rythmes et profils sans exclure ni ralentir l'ensemble du groupe. C'est une des compétences clés du formateur bénévole."},
-  {q:"Pour un groupe hétérogène, quelle organisation favorise la cohésion et l'entraide ?",
-   o:["Cours magistral unique pour l'ensemble du groupe","Travail en binômes ou en îlots mixtes (niveaux différents)","Ignorer les différences et avancer au rythme moyen","Exclure temporairement les apprenants trop éloignés du niveau moyen"],ans:1,
-   fb:"Les îlots hétérogènes valorisent les compétences de chacun : les plus avancés consolident leurs acquis en expliquant, les débutants progressent par observation et émulation."},
-  {q:"L'évaluation formative se distingue de l'évaluation sommative car elle :",
-   o:["Donne une note certifiante en fin de parcours","Régule les apprentissages en cours de séance ou de progression","Classe les apprenants par ordre de mérite","Remplace le diplôme officiel"],ans:1,
-   fb:"L'évaluation formative est au service de l'apprentissage : elle permet au formateur d'ajuster sa pratique et à l'apprenant de prendre conscience de ses progrès."},
-  {q:"Pour un grand groupe (plus de 8 apprenants) avec un seul formateur, la stratégie la plus efficace est :",
-   o:["Cours magistral uniquement pendant toute la séance","Ateliers tournants avec des activités en partie autonomes et autocorrectives","Réduire le nombre d'apprenants admis","Annuler si un deuxième formateur est absent"],ans:1,
-   fb:"Les ateliers tournants permettent à des sous-groupes de travailler de façon semi-autonome pendant que le formateur accompagne un groupe en focus."},
-  {q:"Quelle est la différence fondamentale entre une séance « isolée » et une séance dans une « progression » ?",
-   o:["Leur durée respective","La séance en progression s'inscrit dans un enchaînement logique vers un objectif commun à long terme","Le nombre d'activités proposées","Le type de supports utilisés"],ans:1,
-   fb:"Une séance isolée doit être totalement autonome. Une séance en progression s'appuie sur des acquis antérieurs et prépare les séances suivantes."},
-  {q:"Un « support authentique » en FLE est :",
-   o:["Un document créé spécifiquement pour l'enseignement du FLE","Un document produit par des locuteurs natifs pour un usage réel (ticket, affiche, formulaire…)","Un support validé par l'Éducation Nationale","Un support uniquement numérique et interactif"],ans:1,
-   fb:"Les supports authentiques ancrent l'apprentissage dans la réalité quotidienne et motivent les apprenants en montrant l'utilité concrète de ce qu'ils apprennent."},
-  {q:"La plateforme KHAIRDIDACT est principalement destinée à :",
-   o:["Les apprenants en alphabétisation","Les formateurs bénévoles alpha-FLE de l'Armée du Salut","Les travailleurs sociaux des CHRS","Les responsables régionaux de l'Armée du Salut"],ans:1,
-   fb:"KHAIRDIDACT est un écosystème de ressources et d'outils conçu pour accompagner les formateurs bénévoles dans leur préparation, leur pratique et leur formation continue."},
-  {q:"Travailler avec de jeunes adultes (18-25 ans) plutôt qu'avec des adultes plus âgés implique principalement d'adapter :",
-   o:["La vitesse de parole (parler beaucoup plus lentement)","Les thématiques et supports aux référents culturels et centres d'intérêt des jeunes adultes","La structure grammaticale de chaque activité","Les horaires des séances uniquement"],ans:1,
-   fb:"L'ancrage culturel et la pertinence des thèmes sont essentiels pour maintenir la motivation des jeunes adultes. Les supports proches de leur quotidien (réseaux, musique, emploi…) favorisent l'engagement."},
-  {q:"La « charte pédagogique du formateur bénévole » dans KHAIRDIDACT définit avant tout :",
-   o:["Les horaires obligatoires des séances de formation","Les principes éthiques et pédagogiques guidant la posture et les pratiques du formateur","La liste des supports obligatoires à utiliser","Les critères de certification officielle des apprenants"],ans:1,
-   fb:"La charte pose les valeurs fondatrices : respect de la dignité des apprenants, bienveillance, adaptabilité, confidentialité et engagement bénévole."},
-  {q:"Dans un groupe mixte (femmes et hommes), le formateur doit être attentif à :",
-   o:["Séparer systématiquement les deux genres pour éviter tout conflit","Les dynamiques culturelles pouvant influencer les prises de parole et les interactions","Donner systématiquement la parole aux hommes en premier","Éviter tout sujet de discussion pouvant créer des différences"],ans:1,
-   fb:"Certains apprenants viennent de cultures où la mixité a des codes différents. Le formateur crée un espace sécurisant et équitable pour que chacun puisse s'exprimer."},
-  {q:"Pour évaluer le niveau initial d'un apprenant en alpha-FLE, le formateur dispose de :",
-   o:["Uniquement un test écrit standardisé et normé","L'observation, des échanges oraux informels et des tâches simples contextualisées","Exclusivement un entretien formel en français standard","Les résultats d'une scolarité antérieure présentés par l'apprenant"],ans:1,
-   fb:"L'évaluation initiale en alpha est multimodale et bienveillante : elle évite de mettre l'apprenant en situation d'échec dès le départ et s'appuie sur ses compétences réelles."},
-  {q:"La « roue des méthodes pédagogiques » disponible sur KHAIRDIDACT est un outil qui :",
-   o:["Attribue aléatoirement les apprenants aux formateurs disponibles","Propose de façon aléatoire une approche pédagogique parmi un panel documenté, pour diversifier sa pratique","Génère automatiquement des fiches de séance complètes","Évalue le niveau des apprenants selon des critères prédéfinis"],ans:1,
-   fb:"La roue invite le formateur à sortir de ses habitudes et à expérimenter des méthodes moins familières. Chaque méthode tirée est documentée sur le site."},
-  {q:"Pour un apprenant infra A1.1, la priorité pédagogique absolue est :",
-   o:["La grammaire française et la conjugaison des verbes réguliers","La compréhension de textes courts adaptés","La conscience phonologique, la découverte du principe alphabétique et le développement du geste graphique","La communication orale en situations formelles"],ans:2,
-   fb:"Avant d'écrire, l'apprenant doit comprendre que les sons correspondent à des signes, identifier des phonèmes, et maîtriser la motricité fine du tracé des lettres."},
-  {q:"L'outil de planification assistée par IA de KHAIRDIDACT est conçu pour :",
-   o:["Remplacer entièrement la préparation de séance par le formateur","Suggérer des structures de séance adaptées à partir du contexte saisi par le formateur","Corriger automatiquement les exercices des apprenants en temps réel","Gérer automatiquement les présences et absences"],ans:1,
-   fb:"L'IA est un assistant de préparation, pas un substitut au jugement pédagogique. Elle propose, le formateur adapte en fonction de sa connaissance fine du groupe."},
-  {q:"Pour un groupe permanent et de petite taille, le principal avantage pédagogique est :",
-   o:["La réduction du temps de préparation de chaque séance","La possibilité de construire une progression individualisée et cohérente sur le long terme","La simplification des supports nécessaires","La facilité à recruter de nouveaux apprenants"],ans:1,
-   fb:"Un groupe permanent permet au formateur de connaître profondément chaque apprenant et de construire une trajectoire d'apprentissage personnalisée et progressive."},
-  {q:"La communauté WhatsApp KHAIRDIDACT est conçue pour :",
-   o:["Partager des informations nominatives sur les apprenants entre formateurs","Permettre aux formateurs bénévoles de s'entraider, partager ressources et expériences de terrain","Remplacer les formations en présentiel organisées par l'Armée du Salut","Communiquer directement avec les responsables hiérarchiques"],ans:1,
-   fb:"La communauté WhatsApp est un espace de partage entre pairs : questions pratiques, ressources trouvées, retours d'expérience. Elle renforce la cohésion du réseau bénévole."},
-  {q:"Ce qui caractérise avant tout le formateur bénévole alpha-FLE de l'Armée du Salut est :",
-   o:["Une certification officielle en didactique des langues","Une expertise en linguistique appliquée et en phonologie","Un engagement humain sincère et une capacité à adapter sa pratique aux besoins concrets de chaque apprenant","Un baccalauréat en sciences de l'éducation"],ans:2,
-   fb:"La force du formateur bénévole salutiste est son humanité, sa disponibilité et sa flexibilité. Les compétences pédagogiques se construisent progressivement avec des outils comme KHAIRDIDACT."},
-];
-
-let qOrder=[], qIdx=0, qOk=0;
-
-function shuffle(a){
-  for(let i=a.length-1;i>0;i--){
-    const j=Math.floor(Math.random()*(i+1));
-    [a[i],a[j]]=[a[j],a[i]];
+  if (Object.values(STATE.stepDone).every(Boolean)) {
+    setTimeout(() => {
+      document.getElementById('sec-diag').style.display = '';
+      document.getElementById('nav-4').classList.add('active');
+      document.getElementById('sec-diag').scrollIntoView({ behavior:'smooth' });
+    }, 800);
   }
-  return a;
 }
 
-function launchQuiz(){
-  document.getElementById('diagCard').classList.add('hidden');
-  document.getElementById('quizCard').classList.remove('hidden');
-  qOrder=shuffle([...Array(QQ.length).keys()]);
-  qIdx=0; qOk=0;
-  drawQ();
+/* ══════════════════════════════════════════
+   QUIZ CHAMPION (20 questions)
+══════════════════════════════════════════ */
+let CHAMP_ORDER = [];
+
+function lancerQuizChampion() {
+  CHAMP_ORDER = [...QUIZ_CHAMPION].sort(() => Math.random()-.5);
+  STATE.championQ     = 0;
+  STATE.championScore = 0;
+  document.getElementById('champion-box').classList.add('active');
+  document.querySelector('.btn-primary[onclick="lancerQuizChampion()"]').style.display = 'none';
+  renderQuestion();
 }
 
-function drawQ(){
-  if(qIdx>=20){endQuiz();return}
-  const q=QQ[qOrder[qIdx]];
-  document.getElementById('qCtr').textContent=`Question ${qIdx+1} / 20`;
-  document.getElementById('qScr').textContent=`Score : ${qOk} / ${qIdx}`;
-  document.getElementById('qBar').style.width=`${((qIdx+1)/20)*100}%`;
-  document.getElementById('qQ').textContent=q.q;
-  document.getElementById('qFb').className='hidden';
-  document.getElementById('btnNext').classList.add('hidden');
-
-  const letters='ABCD';
-  document.getElementById('qOpts').innerHTML=q.o.map((opt,i)=>`
-    <button class="qopt" onclick="ansQ(${i})">
-      <span class="qopt-let">${letters[i]}</span>
-      <span>${opt}</span>
-    </button>`).join('');
+function renderQuestion() {
+  const q = CHAMP_ORDER[STATE.championQ];
+  document.getElementById('q-num').textContent   = `Question ${STATE.championQ+1} / 20`;
+  document.getElementById('q-score').textContent = `Score : ${STATE.championScore} / ${STATE.championQ}`;
+  document.getElementById('q-text').textContent  = q.q;
+  const opts = document.getElementById('q-opts');
+  opts.innerHTML = q.opts.map((o,i) => `<button class="q-opt" onclick="answerQ(${i})">${o}</button>`).join('');
+  document.getElementById('btn-qnext').style.display = 'none';
 }
 
-function ansQ(chosen){
-  const q=QQ[qOrder[qIdx]];
-  document.querySelectorAll('.qopt').forEach(b=>b.disabled=true);
-  const ok=chosen===q.ans;
-  if(ok) qOk++;
-  document.querySelectorAll('.qopt')[chosen].classList.add(ok?'ok':'bad');
-  if(!ok) document.querySelectorAll('.qopt')[q.ans].classList.add('ok');
-  const fb=document.getElementById('qFb');
-  fb.innerHTML=`${ok?'✅':'❌'} ${q.fb}`;
-  fb.className=`qfb ${ok?'qfb-ok':'qfb-bad'}`;
-  document.getElementById('btnNext').classList.remove('hidden');
+function answerQ(choice) {
+  const q = CHAMP_ORDER[STATE.championQ];
+  document.querySelectorAll('.q-opt').forEach(b => b.setAttribute('disabled','true'));
+  const opts = document.querySelectorAll('.q-opt');
+  opts[q.r].classList.add('correct');
+  if (choice !== q.r) opts[choice].classList.add('wrong');
+  else STATE.championScore++;
+  const nextBtn = document.getElementById('btn-qnext');
+  nextBtn.textContent = STATE.championQ < 19 ? 'Question suivante →' : 'Voir mon score final →';
+  nextBtn.style.display = 'inline-block';
 }
 
-function nextQ(){qIdx++;drawQ()}
-
-function endQuiz(){
-  document.getElementById('quizBody').classList.add('hidden');
-  document.getElementById('quizEnd').classList.remove('hidden');
-  const pct=Math.round(qOk/20*100);
-  document.getElementById('scoreBig').textContent=`${qOk} / 20 — ${pct}%`;
-  let msg;
-  if(pct>=85) msg=`🏆 Exceptionnel, ${S.nom} ! Vous maîtrisez remarquablement la démarche du formateur bénévole alpha-FLE. KHAIRDIDACT n'a plus de secrets pour vous !`;
-  else if(pct>=65) msg=`👏 Très bien ! Vous avez de solides connaissances. Quelques ressources du site méritent encore d'être explorées pour atteindre la maîtrise complète.`;
-  else if(pct>=45) msg=`💪 Bonne base ! Relisez les ressources du Centre d'Aide Pédagogique pour consolider vos connaissances et retentez le quiz.`;
-  else msg=`🌱 Chaque début est une victoire ! Parcourez les ressources de KHAIRDIDACT et revenez relever le défi. Vous progresserez à chaque visite.`;
-  document.getElementById('scoreMsg').textContent=msg;
+function nextQuestion() {
+  STATE.championQ++;
+  if (STATE.championQ >= 20) showFinalScore();
+  else renderQuestion();
 }
 
-function replayQuiz(){
-  document.getElementById('quizBody').classList.remove('hidden');
-  document.getElementById('quizEnd').classList.add('hidden');
-  qOrder=shuffle([...Array(QQ.length).keys()]);
-  qIdx=0; qOk=0;
-  drawQ();
+function showFinalScore() {
+  const s = STATE.championScore;
+  let stars='⭐', title='Continuez à vous former !', sub='Relisez les ressources KHAIRDIDACT et relancez le parcours.';
+  if(s>=18){stars='⭐⭐⭐';title='Expert·e KHAIRDIDACT !';sub='Félicitations ! Vous maîtrisez la démarche du formateur bénévole Alpha-FLE.';}
+  else if(s>=14){stars='⭐⭐';title='Très bonne maîtrise !';sub='Quelques points à consolider, mais vous avez les fondamentaux.';}
+  else if(s>=10){stars='⭐';title='Bonne progression !';sub='Encore quelques révisions et vous serez prêt·e pour le terrain.';}
+  document.getElementById('final-stars').textContent = stars;
+  document.getElementById('final-title').textContent = title;
+  document.getElementById('final-sub').textContent   = sub + `\n\nScore final : ${s} / 20`;
+  document.getElementById('final-overlay').classList.add('show');
 }
 
-/* ═══ INIT ═══ */
-buildDrums();
+/* ══════════════════════════════════════════
+   UTILITAIRES
+══════════════════════════════════════════ */
+function scrollTo(id) {
+  document.getElementById(id)?.scrollIntoView({ behavior:'smooth' });
+}
+
+function restartAll() {
+  location.reload();
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key==='Escape') closeKhairModal();
+});
+document.getElementById('khair-modal').addEventListener('click', e => {
+  if (e.target === document.getElementById('khair-modal')) closeKhairModal();
+});
 </script>
 </body>
 </html>
